@@ -1,0 +1,33 @@
+### docker compose can be used for 2 things:
+
+Building multi-container apps
+running multi-container apps
+
+#install
+sudo apt-get install docker-compose -y
+
+#getting the app
+
+wget https://github.com/dockersamples/example-voting-app/archive/master.zip
+
+sudo apt-get install unzip -y
+unzip master.zip
+cd example-voting-app-master/
+
+### Building
+
+first we use docker-compose to build the app containers
+in the folder we run:
+
+sudo docker-compose build
+
+# docker-compose up
+
+sudo docker-compose up
+###when running the command you will see:
+"Compose does not use swarm mode to deploy services to multiple nodes in a swarm. All containers will be scheduled on the current node."
+so yes docker compose will run the multi-container app but all containers will be running on swarm1
+we can do better then that
+
+we can open the app on: http://swarm1.watteel.lan:5000/
+and on 5001 we can see the results of the votes

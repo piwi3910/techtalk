@@ -1,0 +1,7 @@
+sudo apt-get install nfs-common -y #on all swarm nodes
+
+docker volume create --driver local --opt type=nfs --opt o=addr=192.168.0.35,nolock,soft,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14 --opt device=:/volume1/swarm disk1
+#docker volume create --driver local --opt type=nfs --opt o=addr=192.168.0.35,nolock,soft,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14 --opt device=:/volume1/swarm/disk1 disk1
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -v disk1:/var/lib/mysql -p 3306:3306 mysql
+
+

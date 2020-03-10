@@ -1,0 +1,17 @@
+### with docker stack we cannot BUILD containers we can only deploy them over a swarm cluster
+so the containers must exists premade with docker-compose
+
+we can however deploy a "stack with the same docker-compose.yml file"
+caveat: "must be compose version 3"
+
+sudo docker stack deploy --compose-file docker-stack.yml vote
+
+we can now open our app on any node on port 5000
+
+try it
+
+http://swarm3.watteel.lan:5000/
+
+this is because of docker swarms service mech, more about that in another video
+
+if you refresh your web browser, you will see the container ID changes as the load is balanced between two nodes

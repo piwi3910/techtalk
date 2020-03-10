@@ -1,0 +1,65 @@
+# On all Hosts:
+# add all glusternodes to your host file like so:
+
+sudo vi /etc/hosts
+
+192.168.10.104 gluster01 gluster01.watteel.lan
+192.168.10.105 gluster02 gluster02.watteel.lan
+192.168.10.106 gluster03 gluster03.watteel.lan
+
+# test you can ping the glusternodes short name:
+
+ping -c 3 gluster01
+ping -c 3 gluster02
+ping -c 3 gluster03
+
+sudo apt install software-properties-common -y
+
+# now browse to: https://launchpad.net/~gluster
+# and have a look what the latest version of the PPA is,
+# currently glusterfs-6
+
+
+sudo add-apt-repository ppa:gluster/glusterfs-6
+sudo apt-get update -y
+
+sudo apt install glusterfs-server -y
+sudo systemctl start glusterd
+sudo systemctl enable glusterd
+
+# create the gluster cluster: run from only one node
+
+sudo gluster peer probe gluster02
+sudo gluster peer probe gluster03
+
+# check the status
+
+gluster peer status
+gluster pool list
+
+# make our data volume
+sudo su -
+echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/sdb
+mkfs.xfs -i size=512 /dev/sdb1
+echo "/dev/sdb1 /export/sdb1 xfs defaults 0 0"  >> /etc/fstab
+mkdir -p /export/sdb1 && mount -a && mkdir -p /export/sdb1/brick
+
+# verify the volume is created and mounted
+df -h
+
+# creating the replicated volume:
+gluster volume create gv0 replica 3 gluster01:/export/sdb1/brick gluster02:/export/sdb1/brick gluster03:/export/sdb1/brick
+gluster volume info
+gluster volume start gv0
+
+# testing the replication
+mkdir -p /mnt/glusterfs/gv0
+mount -t glusterfs gluster01:/gv0 /mnt/glusterfs/gv0
+df -h
+touch /mnt/glusterfs/gv0/my_test_replication_file.text
+ls /mnt/glusterfs/gv0
+
+
+
+
+

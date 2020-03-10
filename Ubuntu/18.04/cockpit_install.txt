@@ -1,0 +1,42 @@
+sudo apt-get install cockpit
+
+systemctl start cockpit
+
+open https://your_ip:9090
+
+login with your user
+select "reuse my password for privileged tasks"
+
+### domain join options
+sudo apt-get install realmd
+
+### performance profile
+sudo apt-get install tuned
+
+!!! not recommended !!!
+### network-manager
+If you want cockpit to manager your network -> you must enable network manager to manage your nic
+and not the ubuntu default -> Netplan
+
+### dockpit and Docker
+install docker following one of my 2 methods
+
+sudo apt-get install cockpit-docker
+
+run tutum/hello-world
+set port to 8888
+
+# disable FW if needed
+sudo ufw disable
+
+### Virtual Machine manager
+sudo apt-get install qemu-kvm kvmtool
+
+sudo apt-get install cockpit-machines
+
+!!!Internal Mirror use any ubuntu real mirror !!!
+wget http://mirror.watteel.lan/ubuntu/ubuntu-18.04.2-live-server-amd64.iso
+path: /home/piwi/ubuntu-18.04.2-live-server-amd64.iso
+
+### Cockpit Applications and updates
+sudo apt-get install cockpit-packagekit

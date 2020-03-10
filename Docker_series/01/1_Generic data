@@ -1,0 +1,17 @@
+ubuntu 18.04
+all updates
+docker latest installed from Docker repo
+
+swarm1 = 192.168.10.101
+swarm2 = 192.168.10.102
+swarm3 = 192.168.10.103
+
+domain: watteel.lan
+all 3 hosts are registered in my internal DNS -> no host files used.
+
+##swarm1 = manager
+
+all others are workers
+
+using mremoteng as ssh client:
+https://mremoteng.org/

@@ -1,0 +1,1 @@
+ambari-server setup-ldap --ambari-admin-username=admin --ambari-admin-password=admin1234 --truststore-reconfigure

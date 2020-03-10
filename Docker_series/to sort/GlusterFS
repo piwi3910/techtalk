@@ -1,0 +1,58 @@
+Add a disk to each VM and format
+
+mkfs.xfs /dev/sdb
+
+#### Prepare dirs on each VM
+
+mkdir -p /gluster/bricks/1
+echo '/dev/sdb /gluster/bricks/1 xfs defaults 0 0' >> /etc/fstab
+mount -a
+mkdir /gluster/bricks/1/brick
+
+mkdir -p /gluster/bricks/2
+echo '/dev/sdb /gluster/bricks/2 xfs defaults 0 0' >> /etc/fstab
+mount -a
+mkdir /gluster/bricks/2/brick
+
+mkdir -p /gluster/bricks/3
+echo '/dev/sdb /gluster/bricks/3 xfs defaults 0 0' >> /etc/fstab
+mount -a
+
+
+##### install glusterfs
+
+apt-get -y update && apt-get -y upgrade
+apt-get install -y software-properties-common
+add-apt-repository ppa:gluster/glusterfs-6 && apt-get update
+apt-get install -y glusterfs-server
+systemctl enable glusterd
+systemctl start glusterd
+systemctl status glusterd
+
+###peer with the other nodes from swarm1
+gluster peer probe swarm2.watteel.lan
+gluster peer probe swarm3.watteel.lan
+gluster peer status
+
+### Create the replicated volume
+
+gluster volume create gfs \
+replica 3 \
+swarm1.watteel.lan:/gluster/bricks/1/brick \
+swarm2.watteel.lan:/gluster/bricks/2/brick \
+swarm3.watteel.lan:/gluster/bricks/3/brick
+
+gluster volume start gfs
+gluster volume status gfs
+gluster volume info gfs
+
+### Add authentication
+gluster volume set gfs auth.allow 192.168.10.101,192.168.10.102,192.168.10.103
+
+### mount the volume on each VM
+mkdir /mnt/gfs
+echo 'localhost:/gfs /mnt/gfs glusterfs defaults,_netdev,backupvolfile-server=localhost 0 0' >> /etc/fstab
+mount.glusterfs localhost:/gfs /mnt/gfs
+
+### verify
+df -Th

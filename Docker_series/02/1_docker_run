@@ -1,0 +1,13 @@
+sudo docker run -d -p 80 tutum/hello-world
+
+sudo docker ps
+
+#find the containerid
+sudo docker port "CONTAINERID"
+
+open the web browser to swarm1:Port
+
+###
+now do "sudo docker ps" on another node and you will see it's empty
+docker run doesn't balance containers over the swarm
+it runs the container on the host it was executed on

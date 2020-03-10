@@ -1,0 +1,36 @@
+#### init the swarm
+
+sudo docker swarm init --advertise-addr 192.168.10.101
+
+###### output
+
+Swarm initialized: current node (vd5v6wumiur6xulj7pfpm011i) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-572dtfcwsufmtq55rtx81jr61fbk52zdhgxd9c1pi4sl9sy21a-0jlvaoxbtpraeeaoh2iueuur2 192.168.10.101:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+##########
+verify it's working
+
+sudo docker info
+
+#### output
+Swarm: active
+  NodeID: vd5v6wumiur6xulj7pfpm011i
+  Is Manager: true
+  ClusterID: 5cujnzwid3m6d0f7wzh4fjk3i
+  Managers: 1
+  Nodes: 3
+  Default Address Pool: 10.0.0.0/8
+  SubnetSize: 24
+  Data Path Port: 4789
+  Orchestration:
+   Task History Retention Limit: 5
+
+
+######
+
+docker node ls

@@ -1,0 +1,44 @@
+### Make the dirs on our glusterFS Cluster
+
+mkdir /mnt/gfs/wp-content
+mkdir /mnt/gfs/mysql
+
+### Create the Stack file
+
+->>> wordpress-stack.yml
+
+# wordpress-stack.yml
+version: '3.1'
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - "/mnt/gfs/wp-content:/var/www/html/wp-content"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - "/mnt/gfs/mysql:/var/lib/mysql"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+
+docker stack deploy -c wordpress-stack.yml wordpress
+
+#find where the wp container is running and open port 8080 and finish installation
