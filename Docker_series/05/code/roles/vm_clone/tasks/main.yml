@@ -39,12 +39,3 @@
   delegate_to: localhost
 
 - name: Connect via Vmware tools
-  vars_prompt:
-  - name: template_user
-    prompt: "What is the username inside your template?"
-    private: no
-  - name: template_password
-    prompt: "What is the password of {{ template_user }}?"
-    private: yes
-  debug:
-    msg: "{{ template_user }} {{ template_password }}"
