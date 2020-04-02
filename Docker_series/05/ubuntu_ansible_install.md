@@ -1,8 +1,12 @@
-install pip
+#Readme
+In this series we will be installing ansible and connecting to our vCenter Server and clone a template
+
+
+###install Prerequirements
 
 sudo apt install python3-pip -y
-
 sudo pip3 install ansible ||true
+sudo pip3 install pyvmomi || true
 
 ansible --version
 

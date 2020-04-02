@@ -1,0 +1,25 @@
+---
+#vCenter Vars
+vcenter_server: "vc01.watteel.lan"
+vcenter_user: "techtalk@vsphere.local"
+vcenter_pass: "MyPa55w0rd1234!"
+datacenter_name: "LAB"
+cluster_name: "Cluster01"
+datastore_name: "VSAN_Datastore"
+folder_name: "Private/techtalk"
+resource_pool_name: "techtalk"
+template_name: "ubuntu_1804"
+network_name: "VLAN160_Techtalk"
+
+#Guest Vars
+mem_size_gb: "8"
+cpu_size: "4"
+os_disk_size_gb: "120" #Set this size to the size of the disk in your template
+data_disk_size_gb: "120"
+domain_name: "watteel.lan"
+network_dns:
+  - 192.168.0.4
+  - 192.168.0.36
+network_gw: "192.168.160.1"
+network_mask: "255.255.255.0"
+
