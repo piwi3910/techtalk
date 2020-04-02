@@ -1,11 +1,18 @@
 #Readme
 In this series we will be installing ansible and connecting to our vCenter Server and clone a template
 
+### Requirements
+- Vsphere template with Ubuntu 18.04
+- add a user in the template that will run ansible (ansible)
+- set a password on the account
+- set the account for password-less sudo
 
 ###install Prerequirements
 
 sudo apt install python3-pip -y
+
 sudo pip3 install ansible ||true
+
 sudo pip3 install pyvmomi || true
 
 ansible --version
