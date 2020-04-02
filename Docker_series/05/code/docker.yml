@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: docker
   gather_facts: no
   tasks:
   - name: Clone the template
