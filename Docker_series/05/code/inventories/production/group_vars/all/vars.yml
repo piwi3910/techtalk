@@ -1,6 +1,8 @@
 ---
-#special Conditionals
+#special Conditionals and vars
 clone_enable: True
+template_user: "piwi"
+template_user_password: "Jbz49teq01!"
 
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"
