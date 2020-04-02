@@ -1,6 +1,0 @@
----
-- hosts: docker
-  gather_facts: no
-  roles:
-    - role: vm_clone
-      when: clone_enabled

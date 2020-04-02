@@ -1,3 +1,4 @@
 ---
 
-- import_playbook: docker.yml
+- import_playbook: vm_clone.yml
+
