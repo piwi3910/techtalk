@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    vcenter_server: "vc01.watteel.lan"
+    vcenter_user: "administrator@vsphere.local"
+    vcenter_pass: "Jbz49teq01!"
+    datacenter_name: "LAB"
+    cluster_name: "Cluster01"
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: "{{ vcenter_server }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: False
+      name: docker01
+      template: TEMPLATES/ubuntu_1804
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm/Private/techtalk
+      cluster: "{{ cluster_name }}"
+      datastore: "VSAN_Datastore"
+      networks:
+      - name: DvSwitch/VLAN160_techtalk
+        ip: 192.168.160.11
+        netmask: 255.255.255.0
+        gateway: 192.168.160.1
+        type: static
+        dns_servers: 192.168.0.4 192.168.0.36
+      customization:
+        hostname: "docker01"
+        dns_servers:
+        - 192.168.0.4
+        - 192.168.0.36
+      state: poweredon
+      wait_for_ip_address: yes
+    delegate_to: localhost
