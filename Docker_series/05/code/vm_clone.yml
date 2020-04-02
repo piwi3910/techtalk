@@ -8,7 +8,6 @@
 - hosts: all
   gather_facts: no
   become: yes
-  become-method: sudo
   vars:
     ansible_connection: vmware_tools
     ansible_vmware_host: "{{ vcenter_server }}"
