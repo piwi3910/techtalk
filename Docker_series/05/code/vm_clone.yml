@@ -1,13 +1,13 @@
 ---
 - hosts: all
   gather_facts: no
-  vars_prompt:
-    - name: template_user
-      prompt: "What is the username inside your template?"
-      private: no
-    - name: template_password
-      prompt: "What is the password of {{ template_user }}?"
-      private: yes
   roles:
     - role: vm_clone
-  when: clone_enable
+      vars_prompt:
+        - name: template_user
+          prompt: "What is the username inside your template?"
+          private: no
+        - name: template_password
+          prompt: "What is the password of {{ template_user }}?"
+          private: yes
+      when: clone_enable
