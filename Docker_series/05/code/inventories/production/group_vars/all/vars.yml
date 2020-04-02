@@ -1,8 +1,8 @@
 ---
 #special Conditionals and vars
 clone_enable: True
-template_user: "piwi"
-template_user_password: "Jbz49teq01!"
+template_user: "ansible"
+template_user_password: "MyPa55w0rd1234!"
 
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"

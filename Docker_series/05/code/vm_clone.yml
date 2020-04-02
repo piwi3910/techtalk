@@ -17,7 +17,6 @@
     ansible_vmware_guest_path: "/{{ datacenter_name }}/vm/{{ folder_name }}/{{ inventory_hostname }}"
     ansible_vmware_tools_user: "{{ template_user }}"
     ansible_vmware_tools_password: "{{ template_user_password }}"
-    ansible_become_password: "{{ template_user_password }}"
   tasks:
     - name: Connect via Vmware tools
       command: whoami
