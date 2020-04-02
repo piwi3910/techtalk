@@ -16,7 +16,7 @@
       datastore: "{{ datastore_name }}"
       resource_pool: "{{ resource_pool_name }}"
       disk:
-      - size_gb: "{{ os_disk_size_gb }"
+      - size_gb: "{{ os_disk_size_gb }}"
         type: eagerzero
         datastore: "{{ datastore_name }}"
       - size_gb: "{{ data_disk_size_gb }}"
