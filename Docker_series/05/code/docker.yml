@@ -27,7 +27,7 @@
         num_cpu: "{{ cpu_size }}"
       networks:
       - name: "{{ network_name }}"
-        ip: "{{ network_ip }}"
+        ip: "{{ ansible_host }}"
         netmask: "{{ network_mask }}"
         gateway: "{{ network_gw }}"
         type: static
