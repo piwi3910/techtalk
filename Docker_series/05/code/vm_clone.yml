@@ -20,7 +20,7 @@
   tasks:
     - name: Connect via Vmware tools and deploy SSH key
       authorized_key:
-        user=devops
+        user=ansible
         key="{{ lookup('file', '/home/{{ local_user }}/.ssh/id_rsa.pub') }}"
         state=present
 
