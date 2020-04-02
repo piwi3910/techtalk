@@ -1,6 +1,8 @@
 ---
 #special Conditionals
 clone_enable: True
+template_user:
+template_password:
 
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"
