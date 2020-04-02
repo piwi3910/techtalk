@@ -46,3 +46,5 @@
   - name: template_password
     prompt: "What is the password of {{ template_user }}?"
     private: yes
+  debug:
+    msg: "{{ template_user }} {{ template_password }}"
