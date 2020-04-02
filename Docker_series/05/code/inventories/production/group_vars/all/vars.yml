@@ -1,8 +1,6 @@
 ---
 #special Conditionals and vars
 clone_enable: True
-template_user: "ansible"
-template_user_password: "MyPa55w0rd1234!"
 ansible_python_interpreter: auto_silent #removes the new warning message
 
 #vCenter Vars
@@ -16,6 +14,8 @@ folder_name: "Private/techtalk"
 resource_pool_name: "techtalk"
 template_name: "ubuntu_1804"
 network_name: "VLAN160_Techtalk"
+template_user: "ansible"
+template_user_password: "MyPa55w0rd1234!"
 
 #Guest Vars
 mem_size_gb: "8"
