@@ -3,6 +3,7 @@
 clone_enable: True
 template_user: "ansible"
 template_user_password: "MyPa55w0rd1234!"
+ansible_python_interpreter: auto_silent #removes the new warning message
 
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"
