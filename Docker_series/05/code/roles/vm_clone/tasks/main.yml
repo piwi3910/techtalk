@@ -37,3 +37,12 @@
     state: poweredon
     wait_for_ip_address: yes
   delegate_to: localhost
+
+- name: Connect via Vmware tools
+  vars_prompt:
+  - name: template_user
+    prompt: "What is the username inside your template?"
+    private: no
+  - name: template_password
+    prompt: "What is the password of {{ template_user }}?"
+    private: yes
