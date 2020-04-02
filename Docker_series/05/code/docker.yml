@@ -8,7 +8,7 @@
       username: "{{ vcenter_user }}"
       password: "{{ vcenter_pass }}"
       validate_certs: False
-      name: docker01
+      name: "{{ inventory_hostname }}"
       template: "{{ template_name }}"
       datacenter: "{{ datacenter_name }}"
       folder: "/{{ datacenter_name }}/vm/{{ folder_name }}"
@@ -27,7 +27,7 @@
         num_cpu: "{{ cpu_size }}"
       networks:
       - name: "{{ network_name }}"
-        ip: 192.168.160.11
+        ip: "{{ network_ip }}"
         netmask: "{{ network_mask }}"
         gateway: "{{ network_gw }}"
         type: static
