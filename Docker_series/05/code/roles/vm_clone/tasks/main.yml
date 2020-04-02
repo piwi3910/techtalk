@@ -1,0 +1,39 @@
+---
+- name: Clone the template
+  vmware_guest:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    validate_certs: False
+    name: "{{ inventory_hostname }}"
+    template: "{{ template_name }}"
+    datacenter: "{{ datacenter_name }}"
+    folder: "/{{ datacenter_name }}/vm/{{ folder_name }}"
+    cluster: "{{ cluster_name }}"
+    datastore: "{{ datastore_name }}"
+    resource_pool: "{{ resource_pool_name }}"
+    disk:
+    - size_gb: "{{ os_disk_size_gb }}"
+      type: eagerzero
+      datastore: "{{ datastore_name }}"
+    - size_gb: "{{ data_disk_size_gb }}"
+      type: eagerzero
+      datastore: "{{ datastore_name }}"
+    hardware:
+      memory_gb: "{{ mem_size_gb }}"
+      num_cpu: "{{ cpu_size }}"
+    networks:
+    - name: "{{ network_name }}"
+      ip: "{{ ansible_host }}"
+      netmask: "{{ network_mask }}"
+      gateway: "{{ network_gw }}"
+      type: static
+    customization:
+      hostname: "{{ inventory_hostname }}"
+      domain: "{{ domain_name }}"
+      dns_suffix:
+        - "{{ domain_name }}"
+      dns_servers: "{{ network_dns }}"
+    state: poweredon
+    wait_for_ip_address: yes
+  delegate_to: localhost
