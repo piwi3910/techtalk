@@ -13,8 +13,6 @@ sudo apt install python3-pip -y
 
 sudo pip3 install ansible ||true
 
-sudo pip3 install pyvmomi || true
-
 ansible --version
 
 ``ansible 2.9.6
