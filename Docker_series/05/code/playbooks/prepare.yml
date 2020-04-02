@@ -6,6 +6,7 @@
     force_purge: true
     installation_dir: roles/public
     installation_prefix: ../
+    install_public_roles: false
   pre_tasks:
     - name: install needed pip modules
       pip:
@@ -19,12 +20,13 @@
         state: absent
       when: force_purge | bool
 
-    - name: Install all vendor roles
+    - name: Install all public roles
       command: >
         ansible-galaxy install
         {{ ( force_purge | bool ) | ternary('--force','') }}
         --role-file {{ installation_prefix }}roles/requirements.yml
         --roles-path {{ installation_prefix }}{{ installation_dir }}
+      when: install_public_roles | bool
 
     - name: cleanup old ssh known_hosts
       file:
