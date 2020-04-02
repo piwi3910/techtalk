@@ -2,10 +2,10 @@
 - hosts: all
   gather_facts: no
   vars_prompt:
-    - name: template_user
+    - name: "template_user"
       prompt: "What is the username inside your template?"
       private: no
-    - name: template_password
+    - name: "template_password"
       prompt: "What is the password of {{ template_user }}?"
       private: yes
   roles:
