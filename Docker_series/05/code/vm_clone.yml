@@ -18,7 +18,15 @@
     ansible_vmware_tools_user: "{{ template_user }}"
     ansible_vmware_tools_password: "{{ template_user_password }}"
   tasks:
-    - name: Connect via Vmware tools
-      command: whoami
-    - name: ping host
+    - name: Connect via Vmware tools and deploy SSH key
+      authorized_key:
+        user=devops
+        key="{{ lookup('file', '/home/{{ local_user }}/.ssh/id_rsa.pub') }}"
+        state=present
+
+- hosts: all
+  gather_facts: yes
+  becomes: yes
+  tasks:
+    - name: test ssh connection with new ssh key
       ping:

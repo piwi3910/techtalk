@@ -2,6 +2,8 @@
 #special Conditionals and vars
 clone_enable: True
 ansible_python_interpreter: auto_silent #removes the new warning message
+ansible_ssh_user: ansible
+local_user: "{{ lookup('env','USER') }}"
 
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"
