@@ -2,5 +2,6 @@
 
 - hosts: docker
   gather_facts: yes
+  become: yes
   roles:
     - role: docker_install
