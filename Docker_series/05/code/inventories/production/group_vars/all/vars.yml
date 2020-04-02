@@ -1,4 +1,6 @@
 ---
+clone_enable: True
+
 #vCenter Vars
 vcenter_server: "vc01.watteel.lan"
 vcenter_user: "techtalk@vsphere.local"

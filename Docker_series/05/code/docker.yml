@@ -2,4 +2,5 @@
 - hosts: docker
   gather_facts: no
   roles:
-    - vm_clone
+    - role: vm_clone
+      when: clone_enabled
