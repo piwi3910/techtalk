@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: vm_clone
   author: Pascal Watteel
-  description: This role will clone vm's as defined in the inventory and inject the ssh keys to make them ready for direct ansible connection
+  description: This role will clone vm's as defined in the inventory
   license: GPLv2
   min_ansible_version: 2.8
   platforms:

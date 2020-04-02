@@ -37,14 +37,3 @@
     state: poweredon
     wait_for_ip_address: yes
   delegate_to: localhost
-
-- name: Connect via Vmware tools
-  command: whoami
-    ansible_connection: vmware_tools
-    ansible_vmware_host: "{{ vcenter_server }}"
-    ansible_vmware_user: "{{ vcenter_user }}"
-    ansible_vmware_password: "{{ vcenter_pass }}"
-    ansible_vmware_validate_certs: no  # default is yes
-    ansible_vmware_guest_path: "/{{ datacenter_name }}/vm/{{ folder_name }}/{{ inventory_hostname }}"
-    ansible_vmware_tools_user: "{{ template_user }}"
-    ansible_vmware_tools_password: "{{ template_user_password }}"
