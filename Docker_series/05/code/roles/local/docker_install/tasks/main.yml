@@ -57,6 +57,10 @@
   run_once: true
   delegate_to: "{{ play_hosts | first }}"
 
+- name: delete the glusterfs plugin if already installed
+  command: docker plugin rm glusterfs
+  ignore: true
+
 - name: install glusterfs plugin
   command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
 
