@@ -21,7 +21,7 @@
 
 - name: add peers to gluster cluster
   command: gluster peer probe {{ ansible_hostname }}
-  delegate_to: docker[0]
+  delegate_to: "{{ play_hosts | first }}"
 
 - name: check the peer list and register output
   command: gluster peer status
