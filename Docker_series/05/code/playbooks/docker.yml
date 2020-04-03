@@ -5,4 +5,5 @@
   become: yes
   roles:
     - role: common
+    - role: glusterfs
     - role: docker_install

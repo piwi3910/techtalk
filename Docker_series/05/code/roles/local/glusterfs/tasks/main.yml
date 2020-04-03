@@ -1,69 +1,20 @@
 ---
 
-- name: install pre-requirements
-  apt:
-    pkg:
-      - unzip
-      - rng-tools
+- name: add glusterfs ppa repo
+  apt_repository:
+    validate_certs: no
+    repo: 'ppa:gluster/glusterfs-7'
+    filename: glusterfs-7
+    update_cache: yes
     state: present
 
-- name: Copy rngd systemd template
-  template:
-    src: rngd.service.j2
-    dest: /etc/systemd/system/rngd.service
-    owner: root
-    group: root
-    mode: 0644
+- name: install glusterfs 7
+  apt:
+    name: glusterfs-server
+  state: present
 
-- name: Ensure that the rngd service is enabled and started at boot time
+- name: Ensure that the glusterfs service is enabled and started at boot time
   service:
-    name: rngd
+    name: glusterd
     enabled: yes
     state: restarted
-
-- name: Check if sdb exist
-  stat:
-    path: /dev/sdb
-  register: sdb
-
-- name: Format Data disk
-  parted:
-    device: /dev/sdb
-    number: 1
-    flags: [ lvm ]
-    state: present
-  when: sdb.stat.exists == True
-
-- name: create volume groups for data disk
-  lvg:
-    vg: vg.data
-    pvs: /dev/sdb1
-  when: sdb.stat.exists == True
-
-- name: create logical volume for data disk
-  lvol:
-    vg: vg.data
-    lv: data
-    size: +100%FREE
-    state: present
-  when: sdb.stat.exists == True
-
-- name: format data volume
-  filesystem:
-    fstype: xfs
-    dev: /dev/vg.data/data
-  when: sdb.stat.exists == True
-
-- name: create data dir
-  file:
-    path: /data
-    state: directory
-  when: sdb.stat.exists == True
-
-- name: mount data disk in data dir
-  mount:
-    path: /data
-    src: /dev/vg.data/data
-    fstype: xfs
-    state: mounted
-  when: sdb.stat.exists == True

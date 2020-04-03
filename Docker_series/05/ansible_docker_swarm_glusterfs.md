@@ -1,17 +1,21 @@
 #Readme
-In this series we will be installing ansible and connecting to our vCenter Server and clone a template
+In this series we will be installing ansible and connecting to our vCenter Server and clone a template.
+We will then use these templates to setup a docker swarm cluster with a shared glusterfs backend for storage.
+Basically automating everything we did manually in the previous videos.
 
 ### Requirements
 - Vsphere template with Ubuntu 18.04
-- add a user in the template that will run ansible (ansible)
+- add a user in the template that will run ansible (ansible) -> use adduser
 - set a password on the account
-- set the account for password-less sudo
+- set the account for password-less sudo -> visudo
+
+***If you need help doing the above drop me a comment***
 
 ###install Prerequirements
 
 sudo apt install python3-pip -y
 
-sudo pip3 install ansible ||true
+sudo pip3 install ansible
 
 ansible --version
 
