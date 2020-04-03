@@ -62,7 +62,7 @@
   register: plugin
 
 - debug:
-    msg: {{ plugin }}
+    msg: "{{ plugin }}"
 
 - name: install glusterfs plugin
   command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
