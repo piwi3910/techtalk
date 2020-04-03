@@ -75,7 +75,7 @@
   lineinfile:
     path: "/etc/hosts"
     regexp: ".*\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
-    line: "{{ inventory_hostname }}\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
+    line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }}\t{{ hostvars[item]['ansible_hostname']}}"
     state: present
     backup: yes
   register: etchostsupdate
