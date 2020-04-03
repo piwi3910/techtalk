@@ -50,19 +50,17 @@
     enabled: yes
     state: restarted
 
-- name: create the docker swarm
+- name: create the docker swarm and first swarm master
   docker_swarm:
     state: present
   register: swarm
   run_once: true
   delegate_to: "{{ play_hosts | first }}"
+  when: "'swarm_masters' in group_names"
 
 - name: check if glusterfs plugin if already installed
   shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
   register: plugin
-
-- debug:
-    msg: "{{ plugin.stdout }}"
 
 - name: GlusterFS block
   block:
