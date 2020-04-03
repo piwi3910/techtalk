@@ -18,3 +18,14 @@
     name: glusterd
     enabled: yes
     state: restarted
+
+- name: add peers to gluster cluster
+  command: gluster peer probe {{ ansible_hostname }}
+  delegate_to: docker[0]
+
+- name: check the peer list and register output
+  command: gluster peer status
+  register: output
+
+- debug:
+    msg: "{{ output }}"
