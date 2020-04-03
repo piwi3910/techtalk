@@ -20,12 +20,19 @@
     state: restarted
 
 - name: add peers to gluster cluster
-  command: gluster peer probe {{ ansible_hostname }}
-  delegate_to: "{{ play_hosts | first }}"
+  gluster_peer:
+    state: present
+    nodes: "{{ play_hosts }}"
 
 - name: check the peer list and register output
-  command: gluster peer status
+  command: gluster peer status | grep Number
   register: output
 
 - debug:
     msg: "{{ output }}"
+
+- name: create glusterfs brick dir
+  file:
+    path: /data/glusterfs/brick01
+    state: directory
+
