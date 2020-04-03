@@ -54,3 +54,4 @@
   gluster_volume:
     state: started
     name: gv0
+  run_once: true
