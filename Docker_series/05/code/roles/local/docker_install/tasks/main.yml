@@ -57,13 +57,11 @@
   run_once: true
   delegate_to: "{{ play_hosts | first }}"
 
-- debug:
-    msg: "{{ swarm }}"
+- name: install glusterfs plugin
+  command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
 
-#- name: join nodes to swarm
-#  docker_swarm:
-#    state: join
-#    join_token: "{{ swarm.swarm_facts.JoinTokens.Worker }}"
-#    remote_addrs: [ '192.168.1.1:2377' ]
-#  delegate_to: "{{ play_hosts | not first }}"
+- name: set gluster nodes in plugin
+  command: "docker plugin set glusterfs SERVERS={{ node_ips }}"
 
+- name: enable the plugin
+  command: docker plugin enable glusterfs

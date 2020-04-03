@@ -1,2 +1,3 @@
 gluster_brick_path: /data/glusterfs/brick01
 gluster_version: 7
+node_ips: "{{ play_hosts | map('extract', hostvars, ['ansible_default_ipv4']) | join(',') }}"
