@@ -10,8 +10,7 @@
 
 - name: install glusterfs 7
   apt:
-    pkg:
-      - glusterfs-server
+    name: glusterfs-server
     state: present
 
 - name: Ensure that the glusterfs service is enabled and started at boot time
