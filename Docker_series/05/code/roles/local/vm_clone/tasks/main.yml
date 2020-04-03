@@ -10,6 +10,9 @@
   register: template_disk_facts
   delegate_to: localhost
 
+- debug:
+    msg: "{{ template_disk_facts }}"
+
 - name: "Define new disk structure"
   set_fact:
 
