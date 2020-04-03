@@ -38,3 +38,27 @@
     - docker-ce-cli
     - containerd.io
     state: present
+
+- name: Ensure that the docker service is enabled and started at boot time
+  service:
+    name: docker
+    enabled: yes
+    state: restarted
+
+- name: create the docker swarm
+  docker_swarm:
+    state: present
+  register: swarm
+  run_once: true
+  delegate_to: "{{ play_hosts | first }}"
+
+- debug:
+    msg: "{{ swarm }}"
+
+#- name: join nodes to swarm
+#  docker_swarm:
+#    state: join
+#    join_token: "{{ swarm.swarm_facts.JoinTokens.Worker }}"
+#    remote_addrs: [ '192.168.1.1:2377' ]
+#  delegate_to: "{{ play_hosts | not first }}"
+
