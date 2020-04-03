@@ -19,10 +19,6 @@ template_user: "ansible"
 template_user_password: "MyPa55w0rd1234!"
 
 #Guest Vars
-mem_size_gb: "8"
-cpu_size: "4"
-os_disk_size_gb: "120" #Set this size to the size of the disk in your template
-data_disk_size_gb: "120"
 domain_name: "watteel.lan"
 network_dns:
   - 192.168.0.4

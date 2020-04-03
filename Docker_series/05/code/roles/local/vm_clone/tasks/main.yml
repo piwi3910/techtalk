@@ -1,4 +1,35 @@
 ---
+- name: "Get facts for named template"
+  vmware_guest_disk_info:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    validate_certs: False
+    datacenter: "{{ datacenter_name }}"
+    name: "{{ template_name }}"
+  register: template_disk_facts
+  delegate_to: localhost
+
+- name: "Define new disk structure"
+  set_fact:
+
+    # Create the list of disks to be deployed. This needs to include
+    # the disks present in the template plus any additional disks
+    # specified for this host in (for example) an attribute called
+    # additional_disks specified in the host's host_vars file.
+    vm_disks: >-
+      [{% for disk in (template_disk_facts.guest_disk_facts|dictsort) %}{
+        'size_kb': {{ disk[1].capacity_in_kb }},
+        'datastore': {{ datastore_name }}},
+      {% endfor %}
+      {% for disk in additional_disks|default([]) %}{
+        {% if disk.size_gb is defined %}'size_gb': {{ disk.size_gb }},{% endif %}
+        {% if disk.size_mb is defined %}'size_mb': {{ disk.size_mb }},{% endif %}
+        {% if disk.size_kb is defined %}'size_kb': {{ disk.size_kb }},{% endif %}
+        'datastore': {{ datastore_name }}},
+      {% endfor %}]
+  delegate_to: localhost
+
 - name: Clone the template
   vmware_guest:
     hostname: "{{ vcenter_server }}"
@@ -12,13 +43,7 @@
     cluster: "{{ cluster_name }}"
     datastore: "{{ datastore_name }}"
     resource_pool: "{{ resource_pool_name }}"
-    disk:
-    - size_gb: "{{ os_disk_size_gb }}"
-      type: eagerzero
-      datastore: "{{ datastore_name }}"
-    - size_gb: "{{ data_disk_size_gb }}"
-      type: eagerzero
-      datastore: "{{ datastore_name }}"
+    disk: "{{ vm_disks }}"
     hardware:
       memory_gb: "{{ mem_size_gb }}"
       num_cpu: "{{ cpu_size }}"

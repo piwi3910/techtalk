@@ -1,8 +1,8 @@
 ---
 
-- hosts: docker
+- hosts: gluster
   gather_facts: yes
   become: yes
   roles:
     - role: common
-    - role: docker_install
+    - role: glusterfs
