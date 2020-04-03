@@ -58,8 +58,8 @@
   delegate_to: "{{ play_hosts | first }}"
 
 - name: check if glusterfs plugin if already installed
-    shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
-    register: plugin
+  command: "docker plugin ls |grep glusterfs |awk '{print $2}'"
+  register: plugin
 
 - name: GlusterFS block
   block:
