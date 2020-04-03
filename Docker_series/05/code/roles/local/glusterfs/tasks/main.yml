@@ -3,12 +3,12 @@
 - name: add glusterfs ppa repo
   apt_repository:
     validate_certs: no
-    repo: 'ppa:gluster/glusterfs-7'
-    filename: glusterfs-7
+    repo: "ppa:gluster/glusterfs-{{ gluster_version }}"
+    filename: "glusterfs-{{ gluster_version }}"
     update_cache: yes
     state: present
 
-- name: install glusterfs 7
+- name: install glusterfs
   apt:
     name: glusterfs-server
     state: present
@@ -25,15 +25,31 @@
     nodes: "{{ play_hosts }}"
   delegate_to: "{{ play_hosts | first }}"
 
-- name: check the peer list and register output
-  command: "gluster peer status | grep Number"
-  register: output
-
-- debug:
-    msg: "{{ output }}"
-
 - name: create glusterfs brick dir
   file:
-    path: /data/glusterfs/brick01
+    path: "{{ gluster_brick_path }}"
     state: directory
 
+- name: create gluster volume
+  gluster_volume:
+    state: present
+    name: gv0
+    bricks: "{{ gluster_brick_path }}"
+    rebalance: yes
+    cluster: "{{ play_hosts }}"
+  delegate_to: "{{ play_hosts | first }}"
+
+- name: Set multiple options on GlusterFS volume
+  gluster_volume:
+    state: present
+    name: gv0
+    options:
+      { performance.cache-size: 256MB,
+        write-behind: 'off',
+        quick-read: 'on'
+      }
+
+- name: start gluster volume
+  gluster_volume:
+    state: started
+    name: gv0
