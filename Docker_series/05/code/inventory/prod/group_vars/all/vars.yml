@@ -28,5 +28,8 @@ network_mask: "255.255.255.0"
 
 test_list:
   - size_gb: "120"
-  - datastore: "VSAN"
+    datastore: "VSAN"
+  - size_gb: "120"
+    datastore: "VSAN2"
+
 
