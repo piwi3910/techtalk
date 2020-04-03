@@ -58,17 +58,17 @@
   delegate_to: "{{ play_hosts | first }}"
 
 - name: check if glusterfs plugin if already installed
-  shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
-  register: plugin
+    shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
+    register: plugin
 
-- debug:
-    msg: "{{ plugin }}"
+- name: GlusterFS block
+  block:
+  - name: install glusterfs plugin
+    command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
 
-- name: install glusterfs plugin
-  command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
+  - name: set gluster nodes in plugin
+    command: "docker plugin set glusterfs SERVERS={{ node_ips }}"
 
-- name: set gluster nodes in plugin
-  command: "docker plugin set glusterfs SERVERS={{ node_ips }}"
-
-- name: enable the plugin
-  command: docker plugin enable glusterfs
+  - name: enable the plugin
+    command: docker plugin enable glusterfs
+  when: plugin.stoud != 'glusterfs:latest'
