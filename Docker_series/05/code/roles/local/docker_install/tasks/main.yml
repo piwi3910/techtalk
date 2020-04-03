@@ -61,6 +61,9 @@
   shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
   register: plugin
 
+- debug:
+    msg: "{{ plugin.stdout }}"
+
 - name: GlusterFS block
   block:
   - name: install glusterfs plugin
