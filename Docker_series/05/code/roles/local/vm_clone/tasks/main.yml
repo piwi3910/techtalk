@@ -33,6 +33,9 @@
       {% endfor %}]
   delegate_to: localhost
 
+- debug:
+    msg: "{{ vm_disks }}"
+
 - name: Clone the template
   vmware_guest:
     hostname: "{{ vcenter_server }}"
