@@ -18,7 +18,7 @@
     # specified for this host in (for example) an attribute called
     # additional_disks specified in the host's host_vars file.
     vm_disks: >-
-      [{% for disk in (template_disk_facts.guest_disk_facts|dictsort) %}{
+      [{% for disk in (template_disk_facts.guest_disk_info|dictsort) %}{
         'size_kb': {{ disk[1].capacity_in_kb }},
         'datastore': {{ datastore_name }}},
       {% endfor %}
