@@ -19,6 +19,11 @@
     - software-properties-common
     state: present
 
+- name: install needed pip modules
+  pip:
+    name:
+      - docker
+
 - name: add the offial Docker repo GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg

@@ -20,7 +20,7 @@
   service:
     name: rngd
     enabled: yes
-    state: restarted
+    state: started
 
 - name: Check if sdb exist
   stat:
