@@ -33,7 +33,7 @@
       {% endfor %}]
   delegate_to: localhost
 
-- debug: var=vm_disk
+- debug: var=vm_disks
 
 - debug: var=test_list
 
