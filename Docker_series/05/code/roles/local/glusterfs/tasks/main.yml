@@ -37,7 +37,7 @@
     bricks: "{{ gluster_brick_path }}"
     rebalance: yes
     cluster: "{{ play_hosts }}"
-  delegate_to: "{{ play_hosts | first }}"
+  run_once: true
 
 - name: Set multiple options on GlusterFS volume
   gluster_volume:
