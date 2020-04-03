@@ -61,8 +61,8 @@
   shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
   register: plugin
 
-debug:
-  msg: {{ plugin }}
+- debug:
+    msg: {{ plugin }}
 
 - name: install glusterfs plugin
   command: "docker plugin install --alias glusterfs trajano/glusterfs-volume-plugin --grant-all-permissions --disable"
