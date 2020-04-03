@@ -23,9 +23,10 @@
   gluster_peer:
     state: present
     nodes: "{{ play_hosts }}"
+  delegate_to: "{{ play_hosts | first }}"
 
 - name: check the peer list and register output
-  command: gluster peer status | grep Number
+  command: "gluster peer status | grep Number"
   register: output
 
 - debug:
