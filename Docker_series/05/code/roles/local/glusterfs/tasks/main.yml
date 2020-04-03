@@ -17,7 +17,7 @@
   service:
     name: glusterd
     enabled: yes
-    state: restarted
+    state: started
 
 - name: add peers to gluster cluster
   gluster_peer:
