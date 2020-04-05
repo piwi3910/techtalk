@@ -27,7 +27,7 @@
 
 - name: Debugging var
   debug:
-    var: additional_disks
+    var: vm_disks
 
 - name: Clone the template
   vmware_guest:
