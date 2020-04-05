@@ -1,6 +1,6 @@
 ---
 - name: "Get facts for named template"
-  vmware_guest_disk_fact:
+  vmware_guest_disk_facts:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_pass }}"
