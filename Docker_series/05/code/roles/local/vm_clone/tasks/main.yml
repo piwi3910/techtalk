@@ -29,23 +29,19 @@
   set_fact:
     vm_disks: >-
       {%- set results = [] -%}
-      {%- for disk in ( template_disk.guest_disk_info | dictsort ) -%}
-      {%- set d = { "size_kb": disk[1].capacity_in_kb } -%}
-      {%- set _ = d.update({ "datastore": disk[1].backing_datastore }) -%}
-      {%- set _ = results.append(d) -%}
+      {%- for osdisk in ( template_disk.guest_disk_info | dictsort ) -%}
+      {%- set od = { "size_kb": osdisk[1].capacity_in_kb } -%}
+      {%- set _ = od.update({ "datastore": disk[1].backing_datastore }) -%}
+      {%- set _ = results.append(od) -%}
       {%- endfor -%}
+      {% for adisk in additional_disks|default([]) %}
+      {% set ad = {"size_gb": adisk.size_gb} if (adisk.size_gb is defined) else {} %}
+      {% set ad = {"size_mb": adisk.size_mb} if (adisk.size_mb is defined) else {} %}
+      {% set ad = {"size_kb": adisk.size_kb} if (adisk.size_kb is defined) else {} %}
+      {% set _ = ad.update({"datastore": adisk.datastore_name}) %}
+      {% set _ = results.append(ad) %}
+      {% endfor %}
       "{{ results }}"
-
-
-
-#      {% for disk in additional_disks|default([]) %}
-#      {% set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {} %}
-#      {% set d = {"size_mb": disk.size_mb} if (disk.size_mb is defined) else {} %}
-#      {% set d = {"size_kb": disk.size_kb} if (disk.size_kb is defined) else {} %}
-#      {% set _ = d.update({"datastore": datastore_name}) %}
-#      {% set _ = results.append(d) %}
-#      {% endfor %}
-
 
 - name: Debugging var
   debug:
