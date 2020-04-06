@@ -31,7 +31,7 @@
       {%- set results = [] -%}
       {%- for osdisk in ( template_disk.guest_disk_info | dictsort ) -%}
       {%- set od = { "size_kb": osdisk[1].capacity_in_kb } -%}
-      {%- set _ = od.update({ "datastore": disk[1].backing_datastore }) -%}
+      {%- set _ = od.update({ "datastore": osdisk[1].backing_datastore }) -%}
       {%- set _ = results.append(od) -%}
       {%- endfor -%}
       {%- for disk in additional_disks|default([]) -%}
