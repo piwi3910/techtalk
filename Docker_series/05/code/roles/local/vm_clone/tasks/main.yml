@@ -29,7 +29,7 @@
   set_fact:
     vm_disks: >-
       {% set results = [] %}
-      {% for d in (template_disk.guest_disk_info|dictsort) %}
+      {% for disk in (template_disk.guest_disk_info|dictsort) %}
       {% set d = {"size_kb": disk[1].capacity_in_kb} %}
       {% set _ = d.update({"datastore": disk[1].backing_datastore}) %}
       {% set _ = results.append(d) %}
