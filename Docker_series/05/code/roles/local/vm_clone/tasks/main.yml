@@ -34,7 +34,7 @@
       {% set _ = d.update({"datastore": disk[1].backing_datastore}) %}
       {% set _ = results.append(d) %}
       {% endfor %}
-      "{{ results }}"
+      "{{ results | to_json }}"
 
 #      {% for disk in additional_disks|default([]) %}
 #      {% set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {} %}
