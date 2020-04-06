@@ -2,4 +2,4 @@ mem_size_gb: "2"
 cpu_size: "2"
 additional_disks:
   - size_gb: "120"
-    datastore: "VSAN_Datastore"
+    datastore_name: "VSAN_Datastore"

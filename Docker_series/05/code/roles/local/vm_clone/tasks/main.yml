@@ -10,20 +10,38 @@
   register: template_disk
   delegate_to: localhost
 
+#- name: "Define new disk structure"
+#  set_fact:
+#    vm_disks: >-
+#      [{% for disk in (template_disk.guest_disk_info|dictsort) %}{
+#        'size_kb': {{ disk[1].capacity_in_kb }},
+#        'datastore': {{ datastore_name }}},
+#      {% endfor %}
+#      {% for disk in additional_disks|default([]) %}{
+#        {% if disk.size_gb is defined %}'size_gb': {{ disk.size_gb }},{% endif %}
+#        {% if disk.size_mb is defined %}'size_mb': {{ disk.size_mb }},{% endif %}
+#        {% if disk.size_kb is defined %}'size_kb': {{ disk.size_kb }},{% endif %}
+#        'datastore': {{ datastore_name }}},
+#      {% endfor %}]
+#  delegate_to: localhost
+
 - name: "Define new disk structure"
   set_fact:
     vm_disks: >-
-      [{% for disk in (template_disk.guest_disk_info|dictsort) %}{
-        'size_kb': {{ disk[1].capacity_in_kb }},
-        'datastore': {{ datastore_name }}},
-      {% endfor %}
-      {% for disk in additional_disks|default([]) %}{
-        {% if disk.size_gb is defined %}'size_gb': {{ disk.size_gb }},{% endif %}
-        {% if disk.size_mb is defined %}'size_mb': {{ disk.size_mb }},{% endif %}
-        {% if disk.size_kb is defined %}'size_kb': {{ disk.size_kb }},{% endif %}
-        'datastore': {{ datastore_name }}},
-      {% endfor %}]
-  delegate_to: localhost
+      {%- set results = [] -%}
+      {%- for disk in (template_disk.guest_disk_info|dictsort)) -%}
+      {%- set d = {"size_kb": disk[1].capacity_in_kb} -%}
+      {%- set _ = d.update({"datastore": disk[1].backing_datastore} -%}
+      {%- set _ = results.append(d) -%}
+      {%- endfor -%}
+      {%- for disk in additional_disks|default([]) -%}
+      {%- set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {})} -%}
+      {%- set d = {"size_mb": disk.size_mb} if (disk.size_mb is defined) else {})} -%}
+      {%- set d = {"size_kb": disk.size_kb} if (disk.size_kb is defined) else {})} -%}
+      {%- set _ = d.update({"datastore": datastore_name} -%}) -%}
+      {%- set _ = results.append(d) -%}
+      {%- endfor -%}
+      {{ results }}
 
 - name: Debugging var
   debug:
