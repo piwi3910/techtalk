@@ -34,13 +34,13 @@
       {% set _ = osdisk.update({"datastore": disk[1].backing_datastore}) %}
       {% set _ = results.append(osdisk) %}
       {% endfor %}
-      {% for disk in additional_disks|default([]) %}
-      {% set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {} %}
-      {% set d = {"size_mb": disk.size_mb} if (disk.size_mb is defined) else {} %}
-      {% set d = {"size_kb": disk.size_kb} if (disk.size_kb is defined) else {} %}
-      {% set _ = d.update({"datastore": datastore_name}) %}
-      {% set _ = results.append(d) %}
-      {% endfor %}
+#      {% for disk in additional_disks|default([]) %}
+#      {% set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {} %}
+#      {% set d = {"size_mb": disk.size_mb} if (disk.size_mb is defined) else {} %}
+#      {% set d = {"size_kb": disk.size_kb} if (disk.size_kb is defined) else {} %}
+#      {% set _ = d.update({"datastore": datastore_name}) %}
+#      {% set _ = results.append(d) %}
+#      {% endfor %}
       {{ results }}
 
 - name: Debugging var
