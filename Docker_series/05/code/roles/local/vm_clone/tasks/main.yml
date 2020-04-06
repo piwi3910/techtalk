@@ -29,10 +29,10 @@
   set_fact:
     vm_disks: >-
       {% set results = [] %}
-      {% for disk in (template_disk.guest_disk_info|dictsort) %}
-      {% set d = {"size_kb": disk[1].capacity_in_kb} %}
-      {% set _ = d.update({"datastore": disk[1].backing_datastore}) %}
-      {% set _ = results.append(d) %}
+      {% for osdisk in (template_disk.guest_disk_info|dictsort) %}
+      {% set osdisk = {"size_kb": disk[1].capacity_in_kb} %}
+      {% set _ = osdisk.update({"datastore": disk[1].backing_datastore}) %}
+      {% set _ = results.append(osdisk) %}
       {% endfor %}
       {% for disk in additional_disks|default([]) %}
       {% set d = {"size_gb": disk.size_gb} if (disk.size_gb is defined) else {} %}
@@ -41,7 +41,7 @@
       {% set _ = d.update({"datastore": datastore_name}) %}
       {% set _ = results.append(d) %}
       {% endfor %}
-      {{ results | to_list }}
+      {{ results }}
 
 - name: Debugging var
   debug:
