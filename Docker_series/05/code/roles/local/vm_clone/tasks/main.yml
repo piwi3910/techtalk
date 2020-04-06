@@ -41,7 +41,7 @@
       {% set _ = d.update({"datastore": datastore_name}) %}
       {% set _ = results.append(d) %}
       {% endfor %}
-      {{ results | to_json }}
+      {{ results | to_list }}
 
 - name: Debugging var
   debug:
