@@ -11,7 +11,8 @@
   gather_facts: yes
   become: yes
   roles:
-    - glusterfs
-      gluster_version: 7
+    - role: glusterfs
+      vars:
+        gluster_version: 7
 
 
