@@ -56,7 +56,7 @@
     name: "{{ swarm_name }}"
   register: swarm_info
   run_once: true
-  delegate_to: "{{ swarm_masters[0] }}"
+  delegate_to: "{{ groups.swarm_masters[0] }}"
 
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
@@ -64,7 +64,7 @@
     name: "{{ swarm_name }}"
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Manager }}"
-  when: "{{ swarm_masters[1:] }}"
+  when: "{{ groups.swarm_masters[1:] }}"
 
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
@@ -72,7 +72,7 @@
     name: "{{ swarm_name }}"
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Worker }}"
-  when: "{{ swarm_workers }}"
+  when: "{{ groups.swarm_workers }}"
 
 - name: check if glusterfs plugin if already installed
   shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
