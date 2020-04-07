@@ -62,14 +62,14 @@
     state: join
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Manager }}"
-  when: "{{ groups.swarm_masters[1:] }}"
+  when: groups.swarm_masters[1:]
 
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
     state: join
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Worker }}"
-  when: "{{ groups.swarm_workers }}"
+  when: groups.swarm_workers
 
 - name: check if glusterfs plugin if already installed
   shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"

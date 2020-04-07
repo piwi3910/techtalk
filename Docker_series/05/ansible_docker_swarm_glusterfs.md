@@ -34,3 +34,11 @@ lets generate a ssh key for our local user
 
 ```ssh-keygen -t rsa```
 
+### Prepare your ansible runner
+We now run our ansible-runner preparation playbook
+
+(make sure you are in the code directory)
+````
+ansible-playbooks playbooks/prepare.yml
+````
+
