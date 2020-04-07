@@ -4,8 +4,8 @@
   gather_facts: yes
   become: yes
   roles:
-    - role: common
-      role: docker_install
+    - common
+    - docker_install
 
 - hosts: docker
   gather_facts: yes
@@ -21,4 +21,4 @@
         name: docker
         state: started
   roles:
-    - role: disk
+    - disk

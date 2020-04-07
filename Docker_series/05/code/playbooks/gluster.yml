@@ -4,14 +4,14 @@
   gather_facts: yes
   become: yes
   roles:
-    - role: common
-      role: disk
+    - common
+    - disk
 
 - hosts: gluster
   gather_facts: yes
   become: yes
   roles:
-    - role: glusterfs
+    - glusterfs
       gluster_version: 7
 
 
