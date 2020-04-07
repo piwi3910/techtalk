@@ -34,7 +34,7 @@
   gluster_volume:
     state: present
     name: gv0
-    bricks: "{{ gluster_brick_path }}"
+    bricks: "{{ gluster_brick_path |join(',')}}"
     rebalance: yes
     cluster: "{{ play_hosts }}"
   run_once: true
