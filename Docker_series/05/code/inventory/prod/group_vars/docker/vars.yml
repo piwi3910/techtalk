@@ -6,7 +6,7 @@ additional_disks:
 
 disk_additional_disks:
   - disk: /dev/sdb
-    fstype: xfs
+    fstype: ext4
     mount_options: defaults
     mount: /var/lib/docker
     user: root
