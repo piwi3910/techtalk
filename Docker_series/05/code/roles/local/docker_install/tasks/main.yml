@@ -56,7 +56,7 @@
   register: swarm_info
   run_once: true
   ignore_errors: yes
-  delegate_to: docker[0]
+  delegate_to: "{{ groups.docker[0] }}"
 
 - name: Bootstrap docker swarm
   docker_swarm:
@@ -65,7 +65,7 @@
     debug: yes
   register: swarm_info
   run_once: true
-  delegate_to: docker[0]
+  delegate_to: "{{ groups.docker[0] }}"
   when: swarm_info.docker_swarm_active == false or swarm_info.docker_swarm_active is not defined
 
 - name: gather tokens from bootstrapped swarm
@@ -73,7 +73,7 @@
     nodes: yes
   register: swarm_info
   run_once: true
-  delegate_to: docker[0]
+  delegate_to: "{{ groups.docker[0] }}"
 
 - name: Add swarm masters to bootstrapped cluster
   docker_swarm:
