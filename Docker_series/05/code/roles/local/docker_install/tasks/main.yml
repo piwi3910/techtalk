@@ -63,8 +63,7 @@
     state: present
   register: swarm_info
   run_once: true
-  delegate_to: "{{ groups.swarm_masters[0] }}"
-  when: swarm_info.docker_swarm_active == false
+  when: swarm_info.docker_swarm_active == false and groups.swarm_masters[0]
 
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
