@@ -53,11 +53,11 @@
 - name: inspect any already deployed swarm cluster
   docker_swarm_info:
     nodes: yes
-  register: swarm_inspection
+  register: swarm_info
 
 - name: debug swarm_inspection
   debug:
-    var: swarm_inspection
+    var: swarm_info
 
 - name: Bootstrap docker swarm on first swarm master
   docker_swarm:
@@ -73,14 +73,14 @@
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
     state: join
-    remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
+    remote_addrs: "{{ hostvars[swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Manager }}"
   when: groups.swarm_masters[1:]
 
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
     state: join
-    remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
+    remote_addrs: "{{ hostvars[swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Worker }}"
   when: groups.swarm_workers
 
