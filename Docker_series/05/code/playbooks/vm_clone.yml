@@ -1,12 +1,14 @@
 ---
 - hosts: all
   gather_facts: no
+  strategy: linear
   roles:
     - role: vm_clone
       when: clone_enable
 
 - hosts: all
   gather_facts: no
+  strategy: linear
   become: yes
   vars:
     ansible_connection: vmware_tools
