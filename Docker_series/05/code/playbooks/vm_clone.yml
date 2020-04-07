@@ -23,6 +23,9 @@
         user=ansible
         key="{{ lookup('file', '/home/{{ local_user }}/.ssh/id_rsa.pub') }}"
         state=present
+    - name: install python3
+      apt:
+        name: python3
 
 - hosts: all
   gather_facts: yes
