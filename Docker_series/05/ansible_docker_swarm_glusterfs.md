@@ -8,6 +8,7 @@ Basically automating everything we did manually in the previous videos.
 - add a user in the template that will run ansible (ansible) -> use adduser
 - set a password on the account
 - set the account for password-less sudo -> visudo
+- copy the cleanup script to your template VM and run it, to fix the vsphere/ubuntu 18.04  template bug: [here](https://kb.vmware.com/s/article/54986)
 
 ***If you need help doing the above drop me a comment***
 
