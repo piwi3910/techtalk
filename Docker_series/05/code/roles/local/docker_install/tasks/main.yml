@@ -53,7 +53,6 @@
 - name: Bootstrap docker swarm on first swarm master
   docker_swarm:
     state: present
-    name: "{{ swarm_name }}"
   register: swarm_info
   run_once: true
   delegate_to: "{{ groups.swarm_masters[0] }}"
@@ -61,7 +60,6 @@
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
     state: join
-    name: "{{ swarm_name }}"
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Manager }}"
   when: "{{ groups.swarm_masters[1:] }}"
@@ -69,7 +67,6 @@
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
     state: join
-    name: "{{ swarm_name }}"
     remote_addrs: "{{ hostvars[swarm_master[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Worker }}"
   when: "{{ groups.swarm_workers }}"
