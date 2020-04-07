@@ -79,7 +79,7 @@
   docker_swarm:
     state: join
     debug: yes
-    remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
+    remote_addrs: "{{ hostvars[groups.docker[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
     advertise_addr: "{{ ansible_default_ipv4.address }}"
   when: swarm_master|bool == True
@@ -87,7 +87,7 @@
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
     state: join
-    remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
+    remote_addrs: "{{ hostvars[groups.docker[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
     advertise_addr: "{{ ansible_default_ipv4.address }}"
   when: swarm_master is not defined
