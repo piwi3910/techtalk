@@ -12,3 +12,5 @@ disk_additional_disks:
     user: root
     group: root
     disable_periodic_fsck: false
+
+swarm_name: "swarm01"
