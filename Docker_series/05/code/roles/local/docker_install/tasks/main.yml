@@ -54,10 +54,7 @@
   docker_swarm_info:
     nodes: yes
   register: swarm_info
-
-- name: debug swarm_inspection
-  debug:
-    var: swarm_info
+  delegate_to: "{{ groups.swarm_masters[0] }}"
 
 - name: Bootstrap docker swarm on first swarm master
   docker_swarm:
@@ -65,10 +62,7 @@
   register: swarm_info
   run_once: true
   delegate_to: "{{ groups.swarm_masters[0] }}"
-
-- name: debug swarm_info var
-  debug:
-    var: swarm_info
+  when: swarm_info.docker_swarm_active == false
 
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
