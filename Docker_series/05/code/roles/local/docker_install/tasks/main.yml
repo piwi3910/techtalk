@@ -73,7 +73,7 @@
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
     state: join
-    remote_addrs: "{{ hostvars[swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
+    remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarmfacts.JoinTokens.Manager }}"
   when: groups.swarm_masters[1:]
 
