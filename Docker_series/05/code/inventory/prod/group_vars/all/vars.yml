@@ -2,6 +2,7 @@
 #special Conditionals and vars
 clone_enable: True
 ansible_ssh_user: ansible
+ansible_python_interpreter: /usr/bin/python3
 local_user: "{{ lookup('env','USER') }}"
 
 #vCenter Vars
