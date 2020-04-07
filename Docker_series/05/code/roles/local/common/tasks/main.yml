@@ -31,7 +31,7 @@
   with_items: "{{ potential_extra_disk }}"
 
 - name: set existing disks to new fact
-  fact:
+  set_fact:
     extra_disks: >-
       {%- set results = [] -%}
       {%- for disk in extra_disks -%}
