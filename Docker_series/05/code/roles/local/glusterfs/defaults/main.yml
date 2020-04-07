@@ -1,0 +1,2 @@
+gluster_brick_path: /data/glusterfs/brick01
+gluster_version: 7

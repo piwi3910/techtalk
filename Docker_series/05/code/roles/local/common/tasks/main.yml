@@ -8,6 +8,8 @@
       - software-properties-common
       - python3
       - python3-pip
+      - xfsprogs
+      - btrfs-progs
     state: present
 
 - name: Copy rngd systemd template
@@ -23,79 +25,6 @@
     name: rngd
     enabled: yes
     state: started
-
-- name: Check if aditional disk exist
-  stat:
-    path: "/dev/{{ item }}"
-  register: extra_disks
-  with_items: "{{ potential_extra_disk }}"
-
-- name: set existing disks to new fact
-  set_fact:
-    extra_disks: >-
-      {%- set results = [] -%}
-      {%- for disk in extra_disks -%}
-        {%- if (disk.stat.exists == True) -%}
-        {%- set d = disk -%}
-        {%- set _ = results.append(d) -%}
-        {%- endif -%}
-      {%- endfor -%}
-      {{ results }}
-
-- name: debug var
-  debug:
-    var: extra_disks
-
-#- name: Format extra disks
-#  parted:
-#    device: "/dev/{{ item }}"
-#    number: 1
-#    flags: [ lvm ]
-#    state: present
-#  when: "extra_disks.{{ item }}.stat.exists == True"
-#  with_items: "{{ potential_extra_disk }}"
-#
-#- name: create volume groups for extra disks
-#  lvg:
-#    vg: "vg.{{ item }}"
-#    pvs: "/dev/{{ item }}"
-#  when: "extra_disks.{{ item }}.stat.exists == True"
-#  with_items: "{{ potential_extra_disk }}"
-#
-#- name: check what volume groups exist
-#  stat:
-#    path: "/dev/vg.{{ item }}"
-#  register: volume_groups
-#  with_items: "{{ potential_extra_disk }}"
-#
-#- name: create logical volume for volume groups
-#  lvol:
-#    vg: "vg.{{ item }}"
-#    lv: "lv.{{ item }}"
-#    size: +100%FREE
-#    state: present
-#  when: volume_groups.stat.exists == True
-#  with_items: "{{ potential_extra_disk }}"
-#
-#- name: format data volume
-#  filesystem:
-#    fstype: xfs
-#    dev: /dev/vg.data/data
-#  when: sdb.stat.exists == True
-#
-#- name: create data dir
-#  file:
-#    path: /data
-#    state: directory
-#  when: sdb.stat.exists == True
-#
-#- name: mount data disk in data dir
-#  mount:
-#    path: /data
-#    src: /dev/vg.data/data
-#    fstype: xfs
-#    state: mounted
-#  when: sdb.stat.exists == True
 
 - name: Update the /etc/hosts file with node name
   tags: etchostsupdate

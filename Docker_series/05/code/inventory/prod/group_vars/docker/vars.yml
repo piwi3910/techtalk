@@ -1,2 +1,14 @@
 mem_size_gb: "16"
 cpu_size: "4"
+additional_disks:
+  - size_gb: "120"
+    datastore_name: "VSAN_Datastore"
+
+disk_additional_disks:
+  - disk: /dev/sdb
+    fstype: xfs
+    mount_options: defaults
+    mount: /var/lib/docker
+    user: root
+    group: root
+    disable_periodic_fsck: false

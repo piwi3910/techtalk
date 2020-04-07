@@ -3,7 +3,25 @@ cpu_size: "2"
 additional_disks:
   - size_gb: "120"
     datastore_name: "VSAN_Datastore"
-  - size_mb: "10240"
+  - size_gb: "120"
     datastore_name: "VSAN_Datastore"
-  - size_kb: "10240000"
-    datastore_name: "VSAN_Datastore"
+
+disk_additional_disks:
+  - disk: /dev/sdb
+    fstype: xfs
+    mount_options: defaults
+    mount: /data/glusterfs/brick01
+    user: root
+    group: root
+    disable_periodic_fsck: false
+  - disk: /dev/sdc
+    fstype: xfs
+    mount_options: defaults
+    mount: /data/glusterfs/brick02
+    user: root
+    group: root
+    disable_periodic_fsck: false
+
+gluster_brick_path:
+  - /data/glusterfs/brick01
+  - /data/glusterfs/brick02

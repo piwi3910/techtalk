@@ -26,10 +26,5 @@ network_dns:
 network_gw: "192.168.160.1"
 network_mask: "255.255.255.0"
 
-test_list:
-  - size_gb: "120"
-    datastore: "VSAN"
-  - size_gb: "120"
-    datastore: "VSAN2"
 
 

@@ -6,3 +6,19 @@
   roles:
     - role: common
     - role: docker_install
+
+- hosts: docker
+  gather_facts: yes
+  become: yes
+  pre_tasks:
+    - name: Stop docker
+      service:
+        name: docker
+        state: stopped
+  post_tasks:
+    - name: start docker
+      service:
+        name: docker
+        state: started
+  roles:
+    - role: disk
