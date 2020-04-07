@@ -50,7 +50,7 @@
     enabled: yes
     state: restarted
 
-- name: inspect any already deployed swarm cluster
+- name: Check if swarm is already created
   docker_swarm_info:
     nodes: yes
   register: swarm_info
@@ -58,12 +58,19 @@
   ignore_errors: yes
   when: groups.swarm_masters[0]
 
-- name: Bootstrap docker swarm on first swarm master
+- name: Bootstrap docker swarm
   docker_swarm:
     state: present
   register: swarm_info
   run_once: true
   when: swarm_info.docker_swarm_active == false or swarm_info.docker_swarm_active is not defined and groups.swarm_masters[0]
+
+- name: gather tokens from bootstrapped swarm
+  docker_swarm_info:
+    nodes: yes
+  register: swarm_info
+  run_once: true
+  when: groups.swarm_masters[0]
 
 - name: Add swarm masters to bootstrapped cluster
   docker_swarm:
