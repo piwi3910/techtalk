@@ -3,3 +3,7 @@ cpu_size: "2"
 additional_disks:
   - size_gb: "120"
     datastore_name: "VSAN_Datastore"
+  - size_mb: "10240"
+    datastore_name: "VSAN_Datastore"
+  - size_kb: "10240000"
+    datastore_name: "VSAN_Datastore"
