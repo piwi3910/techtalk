@@ -75,6 +75,7 @@
     state: join
     remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
+    advertise_addr: "{{ ansible_default_ipv4.address }}"
   when: groups.swarm_masters[1:]
 
 - name: Add other swarm workers to bootstrapped cluster
@@ -82,6 +83,7 @@
     state: join
     remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
+    advertise_addr: "{{ ansible_default_ipv4.address }}"
   when: groups.swarm_workers
 
 - name: check if glusterfs plugin if already installed
