@@ -50,12 +50,25 @@
     enabled: yes
     state: restarted
 
+- name: inspect any already deployed swarm cluster
+  docker_swarm:
+    state: inspect
+  register: swarm_inspection
+
+- name: debug swarm_inspection
+  debug:
+    var: swarm_inspection
+
 - name: Bootstrap docker swarm on first swarm master
   docker_swarm:
     state: present
   register: swarm_info
   run_once: true
   delegate_to: "{{ groups.swarm_masters[0] }}"
+
+- name: debug swarm_info var
+  debug:
+    var: swarm_info
 
 - name: Add other swarm masters to bootstrapped cluster
   docker_swarm:
