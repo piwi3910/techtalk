@@ -34,7 +34,7 @@
       {%- set _ = od.update({ "datastore": osdisk[1].backing_datastore }) -%}
       {%- set _ = results.append(od) -%}
       {%- endfor -%}
-      {%- for disk in additional_disks|default([]) where (disk.size_gb is defined) or (disk.size_mb is defined) or (disk.size_kb is defined) -%}
+      {%- for disk in additional_disks|default([]) -%}
         {%- if (disk.size_gb is defined) %-}
           {%- set d = {"size_gb": disk.size_gb} -%}
           {%- set _ = d.update({"datastore": disk.datastore_name}) -%}
