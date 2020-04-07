@@ -1,2 +1,31 @@
 gluster_brick_path: /data/glusterfs/brick01
 gluster_version: 7
+
+potential_extra_disk:
+  - sdb
+  - sdc
+  - sdd
+  - sde
+  - sdf
+  - sdg
+  - sdh
+  - sdi
+  - sdj
+  - sdk
+  - sdl
+  - sdm
+  - sdn
+  - sdo
+  - sdp
+  - sdq
+  - sdr
+  - sds
+  - sdt
+  - sdu
+  - sdv
+  - sdw
+  - sdx
+  - sdy
+  - sdz
+  - nvmn0
+  - nvmn1

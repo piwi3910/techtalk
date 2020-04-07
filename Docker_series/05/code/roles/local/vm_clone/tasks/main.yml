@@ -10,21 +10,6 @@
   register: template_disk
   delegate_to: localhost
 
-#- name: "Define new disk structure"
-#  set_fact:
-#    vm_disks: >-
-#      [{% for disk in (template_disk.guest_disk_info|dictsort) %}{
-#        'size_kb': {{ disk[1].capacity_in_kb }},
-#        'datastore': {{ datastore_name }}},
-#      {% endfor %}
-#      {% for disk in additional_disks|default([]) %}{
-#        {% if disk.size_gb is defined %}'size_gb': {{ disk.size_gb }},{% endif %}
-#        {% if disk.size_mb is defined %}'size_mb': {{ disk.size_mb }},{% endif %}
-#        {% if disk.size_kb is defined %}'size_kb': {{ disk.size_kb }},{% endif %}
-#        'datastore': {{ datastore_name }}},
-#      {% endfor %}]
-#  delegate_to: localhost
-
 - name: "Define new disk structure"
   set_fact:
     vm_disks: >-
@@ -52,10 +37,6 @@
         {%- endif -%}
       {%- endfor -%}
       {{ results }}
-
-- name: Debugging var
-  debug:
-    var: vm_disks
 
 - name: Clone the template
   vmware_guest:
