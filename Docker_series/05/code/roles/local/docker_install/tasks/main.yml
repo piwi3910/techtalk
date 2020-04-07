@@ -61,6 +61,8 @@
 - name: Bootstrap docker swarm
   docker_swarm:
     state: present
+    advertise_addr: "{{ ansible_default_ipv4.address }}"
+    debug: yes
   register: swarm_info
   run_once: true
   when: swarm_info.docker_swarm_active == false or swarm_info.docker_swarm_active is not defined and groups.swarm_masters[0]
@@ -75,6 +77,7 @@
 - name: Add swarm masters to bootstrapped cluster
   docker_swarm:
     state: join
+    debug: yes
     remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
     advertise_addr: "{{ ansible_default_ipv4.address }}"
