@@ -6,7 +6,7 @@
     force_purge: true
     installation_dir: roles/public
     installation_prefix: ../
-    install_public_roles: false
+    install_public_roles: true
   pre_tasks:
     - name: install needed pip modules
       pip:
