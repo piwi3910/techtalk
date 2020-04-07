@@ -55,8 +55,8 @@
     nodes: yes
   register: swarm_info
   run_once: true
-  delegate_to: "{{ groups.swarm_masters[0] }}"
   ignore_errors: yes
+  when: groups.swarm_masters[0]
 
 - name: Bootstrap docker swarm on first swarm master
   docker_swarm:
