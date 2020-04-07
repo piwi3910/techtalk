@@ -63,15 +63,15 @@
     state: present
   register: swarm_info
   run_once: true
-  when: swarm_info.docker_swarm_active == false and groups.swarm_masters[0]
+  when: swarm_info.docker_swarm_active == false or swarm_info.docker_swarm_active is not defined and groups.swarm_masters[0]
 
-- name: Add other swarm masters to bootstrapped cluster
+- name: Add swarm masters to bootstrapped cluster
   docker_swarm:
     state: join
     remote_addrs: "{{ hostvars[groups.swarm_masters[0]]['ansible_default_ipv4']['address'] }}"
     join_token: "{{ swarm_info.swarm_facts.JoinTokens.Manager }}"
     advertise_addr: "{{ ansible_default_ipv4.address }}"
-  when: groups.swarm_masters[1:]
+  when: groups.swarm_masters
 
 - name: Add other swarm workers to bootstrapped cluster
   docker_swarm:
