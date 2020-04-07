@@ -1,6 +1,5 @@
 ---
 
-- import_playbook: playbooks/prepare.yml
 - import_playbook: playbooks/vm_clone.yml
 - import_playbook: playbooks/gluster.yml
 - import_playbook: playbooks/docker.yml
