@@ -38,6 +38,7 @@
         {%- if (disk.stat.exists == True) -%}
         {%- set d = disk -%}
         {%- set _ = results.append(d) -%}
+        {%- endif -%}
       {%- endfor -%}
       {{ results }}
 
