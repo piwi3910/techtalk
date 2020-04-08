@@ -1,0 +1,19 @@
+---
+
+- hosts: docker[0]
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: download latest portainer stack file
+      get_url:
+        url: https://downloads.portainer.io/portainer-agent-stack.yml
+        dest: /tmp/portainer-agent-stack.yml
+
+    - name: deploy portainer stack
+      docker_stack:
+        name: portainer
+        state: present
+        compose:
+          - /tmp/portainer-agent-stack.yml
+
+
