@@ -1,4 +1,12 @@
 ---
+- name: update apt cache
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: upgrade all packages
+  apt:
+    upgrade: dist
 
 - name: install pre-requirements
   apt:
