@@ -24,6 +24,6 @@
           - version: '3.2'
             volumes:
               portainer_data:
-              driver: 'glusterfs'
+                driver: 'glusterfs'
 
 
