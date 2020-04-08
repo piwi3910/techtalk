@@ -38,6 +38,9 @@
       {%- endfor -%}
       {{ results }}
 
+- debug:
+    msg: "{{ (mem_size_gb * 1024)|int }}"
+
 - name: Clone the template
   vmware_guest:
     hostname: "{{ vcenter_server }}"
