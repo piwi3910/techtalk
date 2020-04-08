@@ -4,6 +4,12 @@
   gather_facts: yes
   become: yes
   tasks:
+    - name: install prereq
+      pip:
+        state: present
+        name:
+          - jsondiff
+
     - name: download latest portainer stack file
       get_url:
         url: https://downloads.portainer.io/portainer-agent-stack.yml
