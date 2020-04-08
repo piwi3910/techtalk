@@ -38,9 +38,6 @@
       {%- endfor -%}
       {{ results }}
 
-- debug:
-    msg: "{{ (mem_size_gb|int) * 1024 }}"
-
 - name: Clone the template
   vmware_guest:
     hostname: "{{ vcenter_server }}"
@@ -56,7 +53,7 @@
     resource_pool: "{{ resource_pool_name }}"
     disk: "{{ vm_disks }}"
     hardware:
-      memory_mb: "{{ (mem_size_gb * 1024)|int }}"
+      memory_mb: "{{ (mem_size_gb|int) * 1024 }}"
       num_cpus: "{{ cpu_size }}"
     networks:
     - name: "{{ network_name }}"
