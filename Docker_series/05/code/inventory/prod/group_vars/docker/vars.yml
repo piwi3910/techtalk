@@ -1,5 +1,5 @@
-mem_size_gb: "16"
-cpu_size: "4"
+mem_gb: "16"
+cpu: "4"
 additional_disks:
   - size_gb: "120"
     datastore_name: "VSAN_Datastore"

@@ -4,6 +4,8 @@
   strategy: linear
   roles:
     - role: vm_clone
+        mem_size_gb: "{{ mem_gb }}"
+        cpu_size: "{{ cpu }}"
       when: clone_enable
 
 - hosts: all
