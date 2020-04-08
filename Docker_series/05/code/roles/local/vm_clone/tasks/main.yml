@@ -39,7 +39,7 @@
       {{ results }}
 
 - debug:
-    msg: "{{ (mem_size_gb * 1024)|int }}"
+    msg: "{{ (mem_size_gb|int) * 1024 }}"
 
 - name: Clone the template
   vmware_guest:
