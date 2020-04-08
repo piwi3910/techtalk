@@ -21,5 +21,9 @@
         state: present
         compose:
           - /tmp/portainer-agent-stack.yml
+          - version: '3.2'
+            volumes:
+              portainer_data:
+              driver: 'glusterfs'
 
 
