@@ -27,5 +27,11 @@ network_dns:
 network_gw: "192.168.160.1"
 network_mask: "255.255.255.0"
 
+gluster_version: 7
+gluster_volume_name: gv0
+gluster_brick_path:
+  - "/data/glusterfs/brick01/{{ gluster_volume_name }}"
+  - "/data/glusterfs/brick02/{{ gluster_volume_name }}"
+
 
 

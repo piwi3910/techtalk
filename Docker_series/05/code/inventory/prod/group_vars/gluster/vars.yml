@@ -21,8 +21,3 @@ disk_additional_disks:
     user: root
     group: root
     disable_periodic_fsck: false
-
-gluster_volume_name: gv0
-gluster_brick_path:
-  - "/data/glusterfs/brick01/{{ gluster_volume_name }}"
-  - "/data/glusterfs/brick02/{{ gluster_volume_name }}"
