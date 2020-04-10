@@ -25,6 +25,6 @@
             Services:
               portainer:
                 volumes:
-                  - /mnt/"{{ gluster_volume_name }}"/portainer/data:/data
+                  - "/mnt/{{ gluster_volume_name }}/portainer/data:/data"
             volumes:
 
