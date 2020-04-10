@@ -22,8 +22,9 @@
         compose:
           - /tmp/portainer-agent-stack.yml
           - version: '3.2'
+            Services:
+              portainer:
+                volumes:
+                  - /mnt/"{{ gluster_volume_name }}"/portainer/data:/data
             volumes:
-              portainer_data:
-                driver: 'glusterfs'
-
 
