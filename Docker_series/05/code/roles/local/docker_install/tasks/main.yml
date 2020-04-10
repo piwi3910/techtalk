@@ -92,18 +92,28 @@
     advertise_addr: "{{ ansible_default_ipv4.address }}"
   when: swarm_master is not defined
 
-- name: check if glusterfs plugin if already installed
-  shell: "docker plugin ls |grep glusterfs |awk '{print $2}'"
-  register: plugin
+- name: add glusterfs ppa repo
+  apt_repository:
+    validate_certs: no
+    repo: "ppa:gluster/glusterfs-{{ gluster_version }}"
+    filename: "glusterfs-{{ gluster_version }}"
+    update_cache: yes
+    state: present
 
-- name: GlusterFS block
-  block:
-  - name: install glusterfs plugin
-    command: "docker plugin install --alias glusterfs piwi3910/glusterfs-volume-plugin --grant-all-permissions --disable"
+- name: install glusterfs client
+  apt:
+    name: glusterfs-client
+    state: present
 
-  - name: set gluster nodes in plugin
-    command: "docker plugin set glusterfs SERVERS={{ node_ips }}"
+- name: make glusterfs mount dir
+  file:
+    path: "/mnt/{{ gluster_volume_name }}"
+    state: present
 
-  - name: enable the plugin
-    command: docker plugin enable glusterfs
-  when: plugin.stdout != 'glusterfs:latest'
+- name: mount glusterfs volume gv0
+  mount:
+    name: /mnt/gv0
+    src: "{{ groups.gluster[0] }}:/{{ gluster_volume_name }}"
+    fstype: glusterfs
+    opts: "defaults,_netdev"
+    state: mounted
