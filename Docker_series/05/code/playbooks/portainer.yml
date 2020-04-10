@@ -22,7 +22,7 @@
         compose:
           - /tmp/portainer-agent-stack.yml
           - version: '3.2'
-            Services:
+            services:
               portainer:
                 volumes:
                   - /mnt/gv0/portainer/data:/data
