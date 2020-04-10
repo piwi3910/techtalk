@@ -108,7 +108,7 @@
 - name: make glusterfs mount dir
   file:
     path: "/mnt/{{ gluster_volume_name }}"
-    state: present
+    state: directory
 
 - name: mount glusterfs volume gv0
   mount:
