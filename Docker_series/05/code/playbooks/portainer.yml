@@ -10,6 +10,11 @@
         name:
           - jsondiff
 
+    - name: Create data dir on glusterfs
+      file:
+        path: "/mnt/{{ gluster_volume_name }}/portainer/data"
+        state: directory
+
     - name: deploy portainer stack
       docker_stack:
         name: portainer
