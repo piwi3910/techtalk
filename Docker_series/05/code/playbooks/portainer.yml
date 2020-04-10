@@ -26,5 +26,5 @@
               portainer:
                 volumes:
                   - /mnt/gv0/portainer/data:/data
-            volumes:
+
 
