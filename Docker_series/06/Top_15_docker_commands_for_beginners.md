@@ -145,5 +145,18 @@ Deleted: sha256:3d7e0e34c3effd992728d5ca852ca12024f952bc9974dd2ae2e07d11db77ba1d
 
 ## 15) docker build
 
+```
+root@docker01:~/techtalk/Docker_series/06# docker build .
+Sending build context to Docker daemon  23.04kB
+Step 1/3 : FROM scratch
+ --->
+Step 2/3 : COPY hello /
+ ---> 409f0ea728dc
+Step 3/3 : CMD ["/hello"]
+ ---> Running in f213f817bc95
+Removing intermediate container f213f817bc95
+ ---> 2b6a604f2d1e
+Successfully built 2b6a604f2d1e
+```
 
 
