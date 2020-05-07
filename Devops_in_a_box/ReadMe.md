@@ -11,25 +11,25 @@ In this episode we wil lbe looking into how to create a full DevOps infrastructu
  * Docker on Synology: Container Engine
  * Portainer: Docker Admin GUI and Docker-compose Provisioner
  * Traefik: Reverse proxy and SSL (letsencrypt)
- * Gitea: git server and source controle for all our code and docker files
+ * Gitea: git server and source control for all our code and docker files
  * Jenkins / BlueOcean: automation pipelines and CI/CD orchestrator
  * Sonatype Nexus: artifact store and Container registry
  
  additionally we will be configuring Nexus as a passthrough proxy so that we can cache any docker hub images.
  We will finish it all up, by creating a jenkins pipeline split in 3 phases:
  
- * Phase 1: Building
- 1. get our code from gitea
+ * Phase 1: Build
+ 1. get our code from Gitea
  2. Build our Dockerfile
  3. Upload our Docker container to our Nexus Registry as 'testing'
  
- * Phase 2: Testing
+ * Phase 2: Test
  1. get our container from the registry with tag 'testing'
  2. run it on docker
  3. test it
  4. Upload our Docker container to our Nexus Registry as 'prod'
  
- * Phase3: deployment
+ * Phase3: Deploy
  1. get our container from the registry with tag 'prod'
  2. deploy it on docker
  3. test our deployment
