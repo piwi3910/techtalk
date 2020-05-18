@@ -1,5 +1,5 @@
 # Intro
-For this episode i'll show you how to run "pi-hole" the add blocker on docker on Synology.
+For this episode i'll show you how to run "pi-hole" the ad blocker on docker on Synology.
 However i'll be doing a few things different from what you may or may not have seen online already.
 There are a few ways of running pi-hole on docker and/or synology but they all have certain drawbacks,
 i did not want to live with.
