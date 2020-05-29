@@ -7,5 +7,5 @@
         name: 10k_subs
         driver: overlay
         ipam_config:
-          - subnet: 10.0.0.0/18
+          - subnet: 10.0.0.0/24
             gateway: 10.0.0.1
