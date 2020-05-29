@@ -2,20 +2,20 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: Remove old overlapping mesh network # has the same 10.0.0./24 range
-      docker_network:
-        name: ingress
-        state: absent
-        force: yes
-
-    - name: Create 10k overlay network
-      docker_network:
-        name: "10k_subs"
-        driver: overlay
-        ipam_config:
-          - subnet: "10.0.0.0/8"
-            gateway: "10.0.0.1"
-            iprange: "10.0.0.0/8"
+#    - name: Remove old overlapping mesh network # has the same 10.0.0./24 range
+#      docker_network:
+#        name: ingress
+#        state: absent
+#        force: yes
+#
+#    - name: Create 10k overlay network
+#      docker_network:
+#        name: "10k_subs"
+#        driver: overlay
+#        ipam_config:
+#          - subnet: "10.0.0.0/8"
+#            gateway: "10.0.0.1"
+#            iprange: "10.0.0.0/8"
 
     - name: Start 10k containers
       docker_swarm_service:
@@ -27,6 +27,4 @@
             published_port: 80
             target_port: 80
         replicas: 10
-        networks:
-          - name: 10k_subs
         state: present
