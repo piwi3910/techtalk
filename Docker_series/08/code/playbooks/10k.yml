@@ -2,21 +2,6 @@
   gather_facts: yes
   become: yes
   tasks:
-#    - name: Remove old overlapping mesh network # has the same 10.0.0./24 range
-#      docker_network:
-#        name: ingress
-#        state: absent
-#        force: yes
-#
-#    - name: Create 10k overlay network
-#      docker_network:
-#        name: "10k_subs"
-#        driver: overlay
-#        ipam_config:
-#          - subnet: "10.0.0.0/8"
-#            gateway: "10.0.0.1"
-#            iprange: "10.0.0.0/8"
-
     - name: tune sysctl parameters for net.ipv4.neigh.default.gc_thresh1
       sysctl:
         name: net.ipv4.neigh.default.gc_thresh1
@@ -38,6 +23,55 @@
         sysctl_set: yes
         state: present
         reload: yes
+    - name: tune sysctl parameters for net.ipv4.ip_local_port_range
+      sysctl:
+        name: net.ipv4.ip_local_port_range
+        value: "1024 65535"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.ipv4.tcp_tw_reuse
+      sysctl:
+        name: net.ipv4.tcp_tw_reuse
+        value: "1"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.ipv4.tcp_fin_timeout
+      sysctl:
+        name: net.ipv4.tcp_fin_timeout
+        value: "15"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.core.somaxconn
+      sysctl:
+        name: net.core.somaxconn
+        value: "4096"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.core.netdev_max_backlog
+      sysctl:
+        name: net.core.netdev_max_backlog
+        value: "4096"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.core.rmem_max
+      sysctl:
+        name: net.core.rmem_max
+        value: "16777216"
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.core.wmem_max
+      sysctl:
+        name: net.core.wmem_max
+        value: "16777216"
+        sysctl_set: yes
+        state: present
+        reload: yes
 
 
 
@@ -52,4 +86,6 @@
             published_port: 80
             target_port: 80
         replicas: 10
+        update_config:
+          - parallelism: 5
         state: present
