@@ -1,0 +1,18 @@
+---
+
+- hosts: gluster
+  gather_facts: yes
+  become: yes
+  roles:
+    - common
+    - disk
+
+- hosts: gluster
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: glusterfs
+      vars:
+        gluster_version: 7
+
+

@@ -1,0 +1,37 @@
+---
+- hosts: all
+  gather_facts: no
+  strategy: linear
+  roles:
+    - role: vm_clone
+      when: clone_enable
+
+- hosts: all
+  gather_facts: no
+  strategy: linear
+  become: yes
+  vars:
+    ansible_connection: vmware_tools
+    ansible_vmware_host: "{{ vcenter_server }}"
+    ansible_vmware_user: "{{ vcenter_user }}"
+    ansible_vmware_password: "{{ vcenter_pass }}"
+    ansible_vmware_validate_certs: no  # default is yes
+    ansible_vmware_guest_path: "/{{ datacenter_name }}/vm/{{ folder_name }}/{{ inventory_hostname }}"
+    ansible_vmware_tools_user: "{{ template_user }}"
+    ansible_vmware_tools_password: "{{ template_user_password }}"
+  tasks:
+    - name: Connect via Vmware tools and deploy SSH key
+      authorized_key:
+        user=ansible
+        key="{{ lookup('file', '/home/{{ local_user }}/.ssh/id_rsa.pub') }}"
+        state=present
+    - name: install python3
+      apt:
+        name: python3
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: test ssh connection with new ssh key
+      ping:

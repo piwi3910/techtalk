@@ -1,0 +1,9 @@
+---
+
+- hosts: docker
+  gather_facts: yes
+  become: yes
+  roles:
+    - common
+    - disk
+    - docker_install

@@ -1,0 +1,47 @@
+---
+- name: update apt cache
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: upgrade all packages
+  apt:
+    upgrade: dist
+
+- name: install pre-requirements
+  apt:
+    pkg:
+      - unzip
+      - rng-tools
+      - software-properties-common
+      - python3
+      - python3-pip
+      - xfsprogs
+      - btrfs-progs
+    state: present
+
+- name: Copy rngd systemd template
+  template:
+    src: rngd.service.j2
+    dest: /etc/systemd/system/rngd.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure that the rngd service is enabled and started at boot time
+  service:
+    name: rngd
+    enabled: yes
+    state: started
+
+- name: Update the /etc/hosts file with node name
+  tags: etchostsupdate
+  become: yes
+  become_user: root
+  lineinfile:
+    path: "/etc/hosts"
+    regexp: ".*\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
+    line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }}\t{{ hostvars[item]['ansible_hostname']}}"
+    state: present
+  register: etchostsupdate
+  with_items: "{{groups['all']}}"

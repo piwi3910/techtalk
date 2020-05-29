@@ -1,0 +1,12 @@
+galaxy_info:
+  role_name: docker_install
+  author: Pascal Watteel
+  description: This role will install the latest docker version for ubuntu from the offical docker repo
+  license: GPLv2
+  min_ansible_version: 2.8
+  platforms:
+    - name: ubuntu
+      versions:
+        - 18.04
+  galaxy_tags: []
+dependencies: []

@@ -1,0 +1,37 @@
+---
+#special Conditionals and vars
+clone_enable: True
+ansible_ssh_user: ansible
+ansible_python_interpreter: /usr/bin/python3
+local_user: "{{ lookup('env','USER') }}"
+
+#vCenter Vars
+vcenter_server: "vc01.watteel.lan"
+vcenter_user: "techtalk@vsphere.local"
+vcenter_pass: "MyPa55w0rd1234!"
+datacenter_name: "LAB"
+cluster_name: "Cluster01"
+datastore_name: "VSAN_Datastore"
+folder_name: "Private/techtalk"
+resource_pool_name: "techtalk"
+template_name: "ubuntu_1804"
+network_name: "VLAN160_Techtalk"
+template_user: "ansible"
+template_user_password: "MyPa55w0rd1234!"
+
+#Guest Vars
+domain_name: "watteel.lan"
+network_dns:
+  - 192.168.0.4
+  - 192.168.0.36
+network_gw: "192.168.160.1"
+network_mask: "255.255.255.0"
+
+gluster_version: 7
+gluster_volume_name: gv0
+gluster_brick_path:
+  - "/data/glusterfs/brick01/{{ gluster_volume_name }}"
+  - "/data/glusterfs/brick02/{{ gluster_volume_name }}"
+
+
+

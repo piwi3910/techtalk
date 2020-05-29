@@ -1,0 +1,11 @@
+- hosts: docker[0]
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Create 10k overlay network
+      docker_network:
+        name: 10k_subs
+        driver: overlay
+        ipam_config:
+          - iprange: 10.0.0.0/18
+          - gateway: 10.0.0.1
