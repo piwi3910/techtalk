@@ -87,5 +87,5 @@
             target_port: 80
         replicas: 10
         update_config:
-          - parallelism: 5
+          parallelism: 5
         state: present
