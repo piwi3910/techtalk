@@ -16,3 +16,14 @@
           - subnet: "10.0.0.0/8"
             gateway: "10.0.0.1"
             iprange: "10.0.0.0/8"
+
+    - name: Start 4 load-balanced containers
+      docker_container:
+        name: "10k{{ item }}"
+        recreate: yes
+        image: rancher/hello-worlde
+        detach: yes
+        published_ports: all
+        networks:
+          - name: 10k_subs
+      with_sequence: count=4
