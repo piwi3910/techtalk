@@ -17,6 +17,31 @@
 #            gateway: "10.0.0.1"
 #            iprange: "10.0.0.0/8"
 
+    - name: tune sysctl parameters for net.ipv4.neigh.default.gc_thresh1
+      sysctl:
+        name: net.ipv4.neigh.default.gc_thresh1
+        value: 16384
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.ipv4.neigh.default.gc_thresh2
+      sysctl:
+        name: net.ipv4.neigh.default.gc_thresh1
+        value: 32768
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: tune sysctl parameters for net.ipv4.neigh.default.gc_thresh3
+      sysctl:
+        name: net.ipv4.neigh.default.gc_thresh1
+        value: 65536
+        sysctl_set: yes
+        state: present
+        reload: yes
+
+
+
+
     - name: Start 10k containers
       docker_swarm_service:
         name: "10k_subs"
