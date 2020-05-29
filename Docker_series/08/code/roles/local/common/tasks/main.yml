@@ -55,5 +55,5 @@
     mode: '0644'
 
 - name: reload sysctl
-  sysctl:
-    reload: yes
+  command:
+    cmd: sysctl --system
