@@ -7,5 +7,5 @@
         name: 10k_subs
         driver: overlay
         ipam_config:
-          - iprange: 10.0.0.0/18
-          - gateway: 10.0.0.1
+          iprange: 10.0.0.0/18
+          gateway: 10.0.0.1
