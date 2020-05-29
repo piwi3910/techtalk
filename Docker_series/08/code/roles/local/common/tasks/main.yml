@@ -45,3 +45,15 @@
     state: present
   register: etchostsupdate
   with_items: "{{groups['all']}}"
+
+- name: copy over tuned sysctl.conf
+  copy:
+    src: files/99-sysctl.conf
+    dest: /etc/sysctl.d/99-sysctl.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: reload sysctl
+  sysctl:
+    reload: yes
