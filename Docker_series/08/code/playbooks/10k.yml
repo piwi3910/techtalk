@@ -18,12 +18,15 @@
             iprange: "10.0.0.0/8"
 
     - name: Start 4 load-balanced containers
-      docker_container:
-        name: "10k{{ item }}"
-        recreate: yes
+      docker_swarm_service:
+        name: "10k_subs"
         image: rancher/hello-world
-        detach: yes
-        published_ports: all
+        publish:
+          mode: ingress
+          protocol: tcp
+          published_port: 80
+          target_port: 80
+        replicas: 10
         networks:
           - name: 10k_subs
-      with_sequence: count=4
+        state: present
