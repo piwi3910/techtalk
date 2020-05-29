@@ -21,7 +21,7 @@
       docker_container:
         name: "10k{{ item }}"
         recreate: yes
-        image: rancher/hello-worlde
+        image: rancher/hello-world
         detach: yes
         published_ports: all
         networks:
