@@ -63,7 +63,7 @@
     state: present
     advertise_addr: "{{ ansible_default_ipv4.address }}"
     debug: yes
-    default_addr_pool: 10.0.0.0
+    default_addr_pool: 10.0.0.0/8
     subnet_size: 8
   register: swarm_info
   run_once: true
