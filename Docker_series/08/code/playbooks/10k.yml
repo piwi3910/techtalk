@@ -17,15 +17,15 @@
             gateway: "10.0.0.1"
             iprange: "10.0.0.0/8"
 
-    - name: Start 4 load-balanced containers
+    - name: Start 10k containers
       docker_swarm_service:
         name: "10k_subs"
         image: rancher/hello-world
         publish:
-          mode: ingress
-          protocol: tcp
-          published_port: 80
-          target_port: 80
+          - mode: ingress
+            protocol: tcp
+            published_port: 80
+            target_port: 80
         replicas: 10
         networks:
           - name: 10k_subs
