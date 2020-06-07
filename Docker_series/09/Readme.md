@@ -13,6 +13,7 @@ we specify:
 ## Step 2: Optimize it!
 In this step we collaps multiple single RUN commands in to single lines as such minimizing the number of layer that are being created
 We also set some variables that could be needed.
+We also make sure no old download artifacts from apt are still there.
 
 ## Step 3: Entrypoints are it!
 In this step we now move our applications RUN command to an entrypoint
@@ -27,3 +28,10 @@ This makes our container smaller and allows us to first mount a volume so that w
 We now have a running application, now lets make it secure.
 We now create a user our application will run as, and make sure all files needed can be accessed.
 
+## Step 6: Read it!
+In this step we make sure our dockerfile is commented and that we move somethings around and line escape
+Who knows how long it will be before we look at it again, our friends may need some help.
+Our Dockerfile becomes our documentation
+
+## Step 7: Lint it! (optional)
+In this step we throw our dockerfile through a linter to make sure we are not forgetting any bestpractices as they change over time.

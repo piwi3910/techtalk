@@ -4,7 +4,7 @@ LABEL maintainer="Pascal Watteel"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt update -y; apt upgrade -y; apt install openjdk-8-jre-headless wget -y
+RUN apt update -y && apt upgrade -y && apt install openjdk-8-jre-headless wget -y && apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /srv
 VOLUME /srv

@@ -8,4 +8,4 @@ then
     echo "eula=true" > /srv/eula.txt
 fi
 
-cd /srv/; java -Xms1024M -Xmx1024M -jar server.jar nogui
+cd /srv/ && java -Xms1024M -Xmx1024M -jar server.jar nogui
