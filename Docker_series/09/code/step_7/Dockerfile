@@ -37,7 +37,3 @@ EXPOSE 25565
 #switch to the dedicated Minecraft user for entrypoint execution
 USER minecraft
 ENTRYPOINT [ "/start.sh" ]
-
-
-
-

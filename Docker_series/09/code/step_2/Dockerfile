@@ -9,7 +9,3 @@ RUN apt update -y && apt upgrade -y && apt install openjdk-8-jre-headless wget -
 RUN mkdir -p /srv && wget https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar -O /srv/server.jar
 
 RUN java -Xms1024M -Xmx1024M -jar server.jar nogui
-
-
-
-

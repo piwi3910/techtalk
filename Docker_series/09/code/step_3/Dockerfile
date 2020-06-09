@@ -13,7 +13,3 @@ RUN chmod +x /start.sh
 EXPOSE 25565
 
 ENTRYPOINT [ "/start.sh" ]
-
-
-
-

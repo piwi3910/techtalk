@@ -16,7 +16,3 @@ EXPOSE 25565
 
 USER minecraft
 ENTRYPOINT [ "/start.sh" ]
-
-
-
-
