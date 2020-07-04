@@ -9,4 +9,4 @@
 7. [Pi-Hole on Docker and Synology with MacVlan](https://www.youtube.com/watch?v=jaYlhE_EEyA)
 8. [Centralized logging and log forwarding with Docker](https://www.youtube.com/watch?v=ix8NfVhKcA8)
 9. [7 simple steps to make your own Docker container](https://www.youtube.com/watch?v=DLxiIYoJbJE)
-10. [Automated Docker builds with DockerHub and Github ](https://www.youtube.com/watch?v=SzzwFauxK98)
+10. [Automated Docker builds with DockerHub and Github](https://www.youtube.com/watch?v=SzzwFauxK98)
