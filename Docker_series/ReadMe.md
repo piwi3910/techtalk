@@ -10,3 +10,4 @@
 8. [Centralized logging and log forwarding with Docker](https://www.youtube.com/watch?v=ix8NfVhKcA8)
 9. [7 simple steps to make your own Docker container](https://www.youtube.com/watch?v=DLxiIYoJbJE)
 10. [Automated Docker builds with DockerHub and Github](https://www.youtube.com/watch?v=SzzwFauxK98)
+11. [Multi arch Docker builds for raspberry pi and Mac arm64 or synology]()
