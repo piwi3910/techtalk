@@ -45,7 +45,7 @@ Status:    running
 Platforms: linux/arm/v7, linux/arm64, linux/amd64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v6
 ```
 
-``` DON'T FORGET TO LOGIN TO DOCKERHUB BEFORE BUILDING AND PUSHING ```
+**DON'T FORGET TO LOGIN TO DOCKERHUB BEFORE BUILDING AND PUSHING**
 
 build our container:
 
