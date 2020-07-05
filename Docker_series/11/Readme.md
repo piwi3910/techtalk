@@ -8,7 +8,7 @@ In this episode we will focus on using an experimental feature of Docker to buil
 
 * Build containers on a fast pc for executing on raspberry pi, as buolding on raspberry pi would take to long
 * Build containers on your pc for multiple users on arm or arm64 while you do not posses a arm or arm64
-* use (future macs)[https://www.macrumors.com/guide/apple-silicon/] to build containers for normal pc's and servers or public clouds
+* use [future macs](https://www.macrumors.com/guide/apple-silicon/) to build containers for normal pc's and servers or public clouds
 
 example architectures:
 
