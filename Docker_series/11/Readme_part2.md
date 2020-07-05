@@ -34,6 +34,28 @@ qemu-x86_64 (enabled):
 
 ```export DOCKER_CLI_EXPERIMENTAL=enabled```
 
+check the current default builder
+```docker buildx ls```
+
+output on x86_64:
+
+```
+NAME/NODE DRIVER/ENDPOINT STATUS  PLATFORMS
+default * docker
+  default default         running linux/amd64, linux/386
+```
+output on arm64:
+
+```
+NAME/NODE DRIVER/ENDPOINT STATUS  PLATFORMS
+default * docker
+  default default         running linux/arm64, linux/arm/v7, linux/arm/v6
+```
+
+As you see for the default builder only the sub-architectures are available, no cross building.
+So lets create our own builder. 
+
+
 create a new builder for the architectures you want:
 ```docker buildx create --name mybuilder --platform linux/arm,linux/arm64,linux/amd64```
 
@@ -81,7 +103,7 @@ Platforms: linux/arm/v7, linux/arm64, linux/amd64, linux/ppc64le, linux/s390x, l
 
 build our container:
 
-```docker buildx build -t piwi3910/hello . --push```
+```docker buildx build --platform linux/arm,linux/arm64,linux/amd64 -t piwi3910/hello . --push```
 
 output:
 

@@ -49,7 +49,7 @@ Platforms: linux/arm/v7, linux/arm64, linux/amd64, linux/ppc64le, linux/s390x, l
 
 build our container:
 
-```docker buildx build -t piwi3910/hello . --push```
+```docker buildx build --platform linux/arm,linux/arm64,linux/amd64 -t piwi3910/hello . --push```
 
 output:
 
