@@ -13,7 +13,7 @@ check the multi arch are enabled
 
 output:
 
-``
+```
 Name:   mybuilder
 Driver: docker-container
 
@@ -22,7 +22,7 @@ Name:      mybuilder0
 Endpoint:  npipe:////./pipe/docker_engine
 Status:    inactive
 Platforms: linux/arm/v7, linux/arm64, linux/amd64
-``
+```
 
 bootstrap the buildkit builder
 
@@ -30,7 +30,7 @@ bootstrap the buildkit builder
 
 output:
 
-``
+```
 [+] Building 0.0s (1/1) FINISHED
  => [internal] booting buildkit                                                                                                          8.8s
  => => pulling image moby/buildkit:buildx-stable-1                                                                                       8.3s
@@ -43,7 +43,7 @@ Name:      mybuilder0
 Endpoint:  npipe:////./pipe/docker_engine
 Status:    running
 Platforms: linux/arm/v7, linux/arm64, linux/amd64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v6
-``
+```
 
 build our container:
 
@@ -51,7 +51,7 @@ build our container:
 
 output:
 
-``
+```
 
 [+] Building 44.2s (12/12) FINISHED
  => [internal] load .dockerignore                                                                                                        0.2s
@@ -81,4 +81,4 @@ output:
  => => exporting config sha256:668f888cd8fb26775234eb761352598caa2585320f016a242b0dc072e9b5d4a2                                          0.0s
  => => pushing layers                                                                                                                    6.9s
  => => pushing manifest for docker.io/piwi3910/hello:latest                                                                              2.1s
-``
+```
