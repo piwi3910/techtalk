@@ -29,4 +29,6 @@ Your builder must at least run docker version 19.03
 
 ## Links
 
-[part1: Buildx with Docker for Windows](Readme_part1.md)
+* [Part1: Cross Building with Buildx and Docker for Windows](Readme_part1.md)
+* [Part2: Building x86_64 on arm64 and visa versa](Readme_part2.md)
+

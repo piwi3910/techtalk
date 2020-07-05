@@ -1,4 +1,4 @@
-# Docker in windows
+# Cross building with buildx and Docker for windows
 
 ```set DOCKER_CLI_EXPERIMENTAL=enabled```
 
