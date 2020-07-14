@@ -84,10 +84,10 @@ restart only 1 service
 
 ## advanced compose commands
 
-``docker-compose up --force-recreate``
+``docker-compose up -d --force-recreate``
 Recreate containers even if their configuration and image haven't changed
 
-``docker-compose up --remove-orphans``
+``docker-compose up -d --remove-orphans``
 Remove containers for services not defined in the Compose file
 
 ``docker-compose down --rmi all``
