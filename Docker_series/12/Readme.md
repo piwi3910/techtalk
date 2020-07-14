@@ -49,3 +49,46 @@ latest reference [link](https://docs.docker.com/compose/compose-file/)
 
     networks
 
+## Compose commands
+
+``docker-compose config``
+checks the compose file to be valid and displays the content
+
+``docker-compose up``
+
+runs your compose file, but in the foreground
+
+``docker-compose up -d``
+same as above but now puts it in the background (deamonize)
+
+``docker-compose stop``
+stops all containers
+
+``docker-compose start``
+start all already created containers
+
+``docker-compose down``
+removes all containers, volumes and networks
+
+``docker-compose rm``
+removes all already stopped containers
+
+``docker-compose pull``
+pulls a new version of the image
+
+``docker-compose restart``
+restart all containers
+
+``docker-compose restart wordpress``
+restart only 1 service
+
+## advanced compose commands
+
+``docker-compose up --force-recreate``
+Recreate containers even if their configuration and image haven't changed
+
+``docker-compose up --remove-orphans``
+Remove containers for services not defined in the Compose file
+
+``docker-compose down --rmi all``
+removes all containers,volumes and networks but also remove the downloaded images
