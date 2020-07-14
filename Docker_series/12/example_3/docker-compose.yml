@@ -7,10 +7,10 @@ services:
        - /data/app/techtalk/examples/wordpress/db:/var/lib/mysql
      restart: always
      environment:
-       MYSQL_ROOT_PASSWORD: somewordpress
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wordpress
-       MYSQL_PASSWORD: wordpress
+       MYSQL_ROOT_PASSWORD: $DB_ROOT
+       MYSQL_DATABASE: $WP_DB
+       MYSQL_USER: $WP_DB_USER
+       MYSQL_PASSWORD: $WP_DB_PASS
 
    wordpress:
      depends_on:
@@ -21,6 +21,6 @@ services:
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD: wordpress
-       WORDPRESS_DB_NAME: wordpress
+       WORDPRESS_DB_USER: $WP_DB_USER
+       WORDPRESS_DB_PASSWORD: $WP_DB_PASS
+       WORDPRESS_DB_NAME: $WP_DB
