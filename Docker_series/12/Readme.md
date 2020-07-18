@@ -1,4 +1,4 @@
-# Automated multi-arch Docker builds with DockerHub and GitHub actions
+# Automated multi-arch Docker builds with DockerHub and GitHub Actions
 
 ## Introduction
 
