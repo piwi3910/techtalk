@@ -68,6 +68,7 @@ you can replace this "VLAN1_pi-hole" with any name you want
 ## starting pi-hole
 execute the command, replacing the ip you selected for pi-hole and password
 
+```
 docker run --detach \
            --name pi-hole \
            --restart always \
@@ -87,7 +88,8 @@ docker run --detach \
            --ip "192.168.0.254" \
            --mac-address "02:42:c0:a8:01:d7" \
            pihole/pihole:latest
-           
+```
+
 ## run Pi-hole (if you have multiple networks/vlans)
 Change 
 
