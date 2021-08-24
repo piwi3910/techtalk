@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300px" src="ansible.png">
+  <img width="150px" src="ansible.png">
 </p>
 
 # Ansible
