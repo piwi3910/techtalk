@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img width="150px" src="ansible.png">
 </p>
 
