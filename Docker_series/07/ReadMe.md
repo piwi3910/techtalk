@@ -86,7 +86,7 @@ docker run --detach \
            --env "TZ=Asia/Dubai" \
            --network VLAN1_pi-hole \
            --ip "192.168.0.254" \
-           --hostname "pi-hole \
+           --hostname "pi-hole" \
            --mac-address "02:42:c0:a8:01:d7" \
            pihole/pihole:latest
 ```
